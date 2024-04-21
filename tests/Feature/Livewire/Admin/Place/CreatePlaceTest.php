@@ -29,6 +29,27 @@ class CreatePlaceTest extends TestCase
         ]);
     }
 
+    /** @test */
+    public function testListPlace()
+    {
+        $adminUser = $this->createAdmin();
+
+        $this->actingAs($adminUser);
+
+        $this->assertDatabaseCount('places', 0);
+
+        Livewire::test(CreatePlace::class)
+            ->set('createForm.name', 'name')
+            ->set('createForm.description', 'Description')
+            ->call('save');
+
+        $this->assertDatabaseCount('places', 1);
+        $response = $this->get('/places');
+
+        $response->assertStatus(200);
+        $response->assertSee('name');
+        $response->assertSee('Description');
+    }
     public function testNameFieldIsRequiredWhenCreatingAPlace()
     {
         $adminUser = $this->createAdmin();
