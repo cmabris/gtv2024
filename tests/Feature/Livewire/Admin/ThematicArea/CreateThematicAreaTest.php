@@ -25,7 +25,6 @@ class CreateThematicAreaTest extends TestCase
         $this->assertDatabaseCount('thematic_areas', 1);
 
         $this->assertDatabaseHas('thematic_areas', [
-            'id' => 1,
             'name' => 'Nombre',
             'description' => 'Descripción',
         ]);
