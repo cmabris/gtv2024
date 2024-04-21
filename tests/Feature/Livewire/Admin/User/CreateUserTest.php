@@ -23,13 +23,13 @@ class CreateUserTest extends TestCase
 
         $user = User::factory()->create();
         $role = Role::factory()->create();
-      
+        $users = $user->attach($role->id); 
 
         Livewire::test(CreateUser::class)
             ->set('createForm.name', $user->name)
             ->set('createForm.email', $user->email)
             ->set('createForm.password', $user->password)
-            ->set('createForm.role', $role->id)
+            ->set('createForm.role', $users)
             ->call('save');
 
         $this->assertDatabaseHas('users', [
