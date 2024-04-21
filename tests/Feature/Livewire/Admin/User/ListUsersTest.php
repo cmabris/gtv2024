@@ -3,24 +3,23 @@
 namespace Tests\Feature\Livewire\Admin\User;
 
 use App\Http\Livewire\Admin\User\ListUsers;
-use App\Models\Role;
 use App\Models\User;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Date;
 use Livewire\Livewire;
+use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class DeleteUserTest extends TestCase
+class ListUsersTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     /** @test */
-    public function it_deletes_a_user()
+    public function it_see_the_users()
     {
         $adminUser = $this->createAdmin();
         $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
+        $teacherRole = Role::create(['name' => 'Profesor']);
 
         $user = User::create([
             'name' => 'Student',
@@ -33,7 +32,7 @@ class DeleteUserTest extends TestCase
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
         $user->assignRole($studentRole);
-        $user2->assignRole($studentRole);
+        $user2->assignRole($teacherRole);
 
         $this->assertDatabaseCount('users',3);
 
@@ -42,10 +41,5 @@ class DeleteUserTest extends TestCase
         Livewire::test(ListUsers::class)
             ->call('show', $user)
             ->call('show', $user2);
-
-        Livewire::test(ListUsers::class)
-            ->call('delete',$user);
-
-        $this->assertDatabaseCount('users',2);
     }
 }
