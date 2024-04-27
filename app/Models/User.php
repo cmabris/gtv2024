@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Video::class, 'creator');
     }
+
+    public function getAuthPasswordName()
+    {
+        return 'password';
+    }
 }
