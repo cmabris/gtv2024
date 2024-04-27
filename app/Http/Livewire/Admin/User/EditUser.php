@@ -63,7 +63,7 @@ class EditUser extends Component
 
     public function update(User $user)
     {
-        $this->rules['editForm.email'] = 'required|confirmed|string|max:45|unique:users,email,' . $this->userId;
+        $this->rules['editForm.email'] = 'email|required|confirmed|string|max:45|unique:users,email,' . $this->userId;
 
         $this->validate();
 
