@@ -1,5 +1,5 @@
 <div>
-    <x-jet-dialog-modal wire:model="editForm.open">
+    <x-dialog-modal wire:model.live="editForm.open">
         <x-slot name="title">
             <span class="text-2xl">Editar vídeo #{{ $videoId }}</span>
         </x-slot>
@@ -8,10 +8,10 @@
             <div class="space-y-6">
                 @livewire('admin.video.video-preview', ['route' => $videoRoute])
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Punto de interés
-                    </x-jet-label>
-                    <select wire:model="editForm.pointOfInterest" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1">
+                    </x-label>
+                    <select wire:model.live="editForm.pointOfInterest" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1">
                         <option value="" selected disabled>Elige uno</option>
                         @foreach($pointsOfInterest as $pointOfInterest)
                             <option value="{{ $pointOfInterest->id }}" @if($pointOfInterest->id === $editForm['pointOfInterest']) {{ 'selected' }} @endif>
@@ -19,13 +19,13 @@
                             </option>
                         @endforeach
                     </select>
-                    <x-jet-input-error for="editForm.pointOfInterest" class="mt-2" />
+                    <x-input-error for="editForm.pointOfInterest" class="mt-2" />
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Área temática
-                    </x-jet-label>
-                    <select wire:model="editForm.thematicArea" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1">
+                    </x-label>
+                    <select wire:model.live="editForm.thematicArea" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1">
                         <option value="" selected disabled>Elige una</option>
                         @if( ! is_null($thematicAreas))
                             @foreach($thematicAreas as $thematicArea)
@@ -35,14 +35,14 @@
                             @endforeach
                         @endif
                     </select>
-                    <x-jet-input-error for="editForm.thematicArea" class="mt-2" />
+                    <x-input-error for="editForm.thematicArea" class="mt-2" />
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Descripción
-                    </x-jet-label>
-                    <textarea wire:model="editForm.description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1"></textarea>
-                    <x-jet-input-error for="editForm.description" class="mt-2" />
+                    </x-label>
+                    <textarea wire:model.live="editForm.description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1"></textarea>
+                    <x-input-error for="editForm.description" class="mt-2" />
                 </div>
             </div>
         </x-slot>
@@ -52,7 +52,7 @@
                 Actualizar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     @push('scripts')
         <script>

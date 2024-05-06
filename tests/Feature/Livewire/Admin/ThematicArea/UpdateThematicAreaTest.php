@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire\Admin\ThematicArea;
 
-use App\Http\Livewire\Admin\ThematicArea\ThematicAreas;
+use App\Livewire\Admin\ThematicArea\ThematicAreas;
 use App\Models\ThematicArea;
 use Livewire\Livewire;
 use Tests\TestCase;

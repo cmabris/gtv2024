@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\Admin\Photography\Photographies;
+use App\Livewire\Admin\Photography\Photographs;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -31,7 +31,7 @@ class DeletePhotographyTest extends TestCase
 
         ]);
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->call('delete', $photography);
 
         $this->assertDatabaseCount('photographies', 0);

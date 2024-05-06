@@ -15,7 +15,7 @@
             <div class="inline">
                 <select class="text-black  bg-blue-100 hover:bg-grey-200 focus:ring-4 focus:ring-blue-300
                     font-medium rounded-lg text-sm py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700
-                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model="searchColumn">
+                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model.live="searchColumn">
                     <option value="id">ID</option>
                     <option value="point_of_interest_id">PUNTO DE INTERÉS</option>
                     @hasanyrole('Administrador|Profesor')
@@ -28,10 +28,10 @@
                 </select>
             </div>
 
-            <x-jet-input class="py-1 border-black" type="text" wire:model="search"
-                placeholder="Buscar ..."></x-jet-input>
+            <x-input class="py-1 border-black" type="text" wire:model.live="search"
+                placeholder="Buscar ..."></x-input>
 
-            <x-jet-button wire:click="resetFilters">Eliminar filtros</x-jet-button>
+            <x-button wire:click="resetFilters">Eliminar filtros</x-button>
         </div>
 
         @if(count($photographies))
@@ -170,7 +170,7 @@
                                     <i class="fa-solid fa-pencil"></i>
                                 </span>
                                 <span class="font-medium text-red-500 cursor-pointer"
-                                      wire:click="$emit('deletePhotography', '{{ $photography->id }}')">
+                                      wire:click="$dispatch('deletePhotography', '{{ $photography->id }}')">
                                     <i class="fa-solid fa-trash"></i>
                                 </span>
                             </td>
@@ -189,7 +189,7 @@
         @endif
     </div>
 
-    <x-jet-dialog-modal wire:model="showModal.open">
+    <x-dialog-modal wire:model.live="showModal.open">
         <x-slot name="title">
             <span class="text-2xl">Detalle de la fotografía #{{ $showModal['id'] }}</span>
         </x-slot>
@@ -203,71 +203,71 @@
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Ruta: {{ $showModal['route'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Orden: {{ $showModal['order'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 @if( ! empty($showModal['pointOfInterestId']))
                     <div class="mb-4">
-                        <x-jet-label>
+                        <x-label>
                             Punto de interés: {{ $showModal['pointOfInterestId'] }}
-                        </x-jet-label>
+                        </x-label>
                     </div>
 
                     <div class="mb-4">
-                        <x-jet-label>
+                        <x-label>
                             @if( ! empty($showModal['thematicAreaId']))
                                 Área temática: {{ $showModal['thematicAreaName'] }} (ID: {{ $showModal['thematicAreaId'] }})
                             @else
                                 Área temática: <span class="text-red-600">Ninguna</span>
                             @endif
-                        </x-jet-label>
+                        </x-label>
                     </div>
                 @else
                     <div class="mb-4">
-                        <x-jet-label>
+                        <x-label>
                             Punto de interés: <span class="text-red-600">Ninguno</span>
-                        </x-jet-label>
+                        </x-label>
                     </div>
                     <div class="mb-4">
-                        <x-jet-label>
+                        <x-label>
                             Área temática: <span class="text-red-600">Ninguna</span>
-                        </x-jet-label>
+                        </x-label>
                     </div>
                 @endif
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Creador: {{ $showModal['creatorName'] }} (ID: {{ $showModal['creatorId'] }})
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 @if( ! is_null($showModal['updaterId']))
                     <div class="mb-4">
-                        <x-jet-label>
+                        <x-label>
                             Actualizador: {{ $showModal['updaterName'] }} (ID: {{ $showModal['updaterId'] }})
-                        </x-jet-label>
+                        </x-label>
                     </div>
                 @endif
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Fecha de creación: {{ $showModal['createdAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 @if( ! is_null($showModal['updaterId']))
                     <div class="mb-4">
-                        <x-jet-label>
+                        <x-label>
                             Fecha de actualización: {{ $showModal['updatedAt'] }}
-                        </x-jet-label>
+                        </x-label>
                     </div>
                 @endif
             </div>
@@ -278,9 +278,9 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
-    <x-jet-dialog-modal wire:model="createForm.open">
+    <x-dialog-modal wire:model.live="createForm.open">
         <x-slot name="title">
             <span class="text-2xl">Crear fotografía</span>
         </x-slot>
@@ -298,9 +298,9 @@
                         Fotografía
                     </label>
 
-                    <input type="file" wire:model="createForm.route" class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-1"></input>
+                    <input type="file" wire:model.live="createForm.route" class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 mt-1"></input>
 
-                    <x-jet-input-error for="editForm.route" class="mt-2" />
+                    <x-input-error for="editForm.route" class="mt-2" />
                 </div>
                 <div class="mb-6">
                     <label for="pointsOfInterest" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
@@ -309,7 +309,7 @@
                     <select id="pointsOfInterest" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
                 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            wire:model="createForm.pointOfInterestId">
+                            wire:model.live="createForm.pointOfInterestId">
                         <option>Seleccione un punto de interés</option>
                         @foreach ($pointsOfInterest as $pointOfInterest)
                             <option value="{{ $pointOfInterest->id}}">{{ $pointOfInterest->id }}</option>
@@ -325,7 +325,7 @@
                     <select id="thematicAreas" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
                 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
                 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            wire:model="createForm.thematicAreaId">
+                            wire:model.live="createForm.thematicAreaId">
                         <option>Seleccione un area de temática</option>
                         @if( ! is_null($thematicAreas))
                             @foreach ($thematicAreas as $thematicArea)
@@ -343,9 +343,9 @@
                 Crear
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
-    <x-jet-dialog-modal wire:model="editModal.open">
+    <x-dialog-modal wire:model.live="editModal.open">
         <x-slot name="title">
             <span class="text-2xl">Actualizar fotografía #{{ $this->editModal['id'] }}</span>
         </x-slot>
@@ -363,20 +363,20 @@
                     @endif
                 </div>
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Cambiar fotografía
-                    </x-jet-label>
+                    </x-label>
 
-                    <x-jet-input class="w-full"  type="file" wire:model="editForm.route"></x-jet-input>
+                    <x-input class="w-full"  type="file" wire:model.live="editForm.route"></x-input>
 
-                    <x-jet-input-error for="editForm.route" class="mt-2" />
+                    <x-input-error for="editForm.route" class="mt-2" />
                 </div>
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Punto de interés
-                    </x-jet-label>
+                    </x-label>
 
-                    <select wire:model="editForm.pointOfInterestId" class="bg-gray-50 border border-gray-300
+                    <select wire:model.live="editForm.pointOfInterestId" class="bg-gray-50 border border-gray-300
                             text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
                             p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                             dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1">
@@ -385,15 +385,15 @@
                         @endforeach
                     </select>
 
-                    <x-jet-input-error for="editForm.pointOfInterest" class="mt-2" />
+                    <x-input-error for="editForm.pointOfInterest" class="mt-2" />
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Área temática
-                    </x-jet-label>
+                    </x-label>
 
-                    <select wire:model="editForm.thematicAreaId" class="bg-gray-50 border border-gray-300
+                    <select wire:model.live="editForm.thematicAreaId" class="bg-gray-50 border border-gray-300
                             text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full
                             p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white
                             dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1">
@@ -405,7 +405,7 @@
                         @endif
                     </select>
 
-                    <x-jet-input-error for="editForm.thematicAreaId" class="mt-2" />
+                    <x-input-error for="editForm.thematicAreaId" class="mt-2" />
                 </div>
             </div>
         </x-slot>
@@ -415,7 +415,7 @@
                 Actualizar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     @push('scripts')
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

@@ -1,5 +1,5 @@
 <div>
-    <x-jet-dialog-modal wire:model="editForm.open">
+    <x-dialog-modal wire:model.live="editForm.open">
         <x-slot name="title">
             <span class="text-2xl">Editar usuario #{{ $userId }}</span>
         </x-slot>
@@ -17,42 +17,42 @@
                 <div class="grid gap-6 mb-6 lg:grid-cols-2">
                     <div>
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Nombre</label>
-                        <input wire:model="editForm.name" type="text" id="name" minlength="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                        <x-jet-input-error for="editForm.name" class="mt-2" />
+                        <input wire:model.live="editForm.name" type="text" id="name" minlength="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <x-input-error for="editForm.name" class="mt-2" />
                     </div>
                     <div>
                         <label for="role" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Role</label>
-                        <select wire:model="editForm.role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1">
+                        <select wire:model.live="editForm.role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1">
                             <option value="" disabled>Elige uno</option>
                             @foreach($roles as $role)
                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
-                        <x-jet-input-error for="editForm.role" class="mt-2" />
+                        <x-input-error for="editForm.role" class="mt-2" />
                     </div>
                 </div>
 
                 <div class="grid gap-6 mb-6 lg:grid-cols-2">
                     <div>
                         <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Email</label>
-                        <input wire:model="editForm.email" type="email" id="email" minlength="1" maxlength="45" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                        <x-jet-input-error for="editForm.email" class="mt-2" />
+                        <input wire:model.live="editForm.email" type="email" id="email" minlength="1" maxlength="45" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <x-input-error for="editForm.email" class="mt-2" />
                     </div>
                     <div>
                         <label for="email_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirmar email</label>
-                        <input wire:model="editForm.email_confirmation" value="{{ $editForm['email'] }}" type="email" id="email_confirmation" minlength="1" maxlength="45" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <input wire:model.live="editForm.email_confirmation" value="{{ $editForm['email'] }}" type="email" id="email_confirmation" minlength="1" maxlength="45" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
                 </div>
 
                 <div class="grid gap-6 mb-6 lg:grid-cols-2">
                     <div>
                         <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Contraseña</label>
-                        <input wire:model="editForm.password" type="text" id="password" minlength="8" maxlength="45" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                        <x-jet-input-error for="editForm.password" class="mt-2" />
+                        <input wire:model.live="editForm.password" type="text" id="password" minlength="8" maxlength="45" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <x-input-error for="editForm.password" class="mt-2" />
                     </div>
                     <div>
                         <label for="password_confirmation" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Confirmar contraseña</label>
-                        <input wire:model="editForm.password_confirmation" type="text" id="password_confirmation" minlength="8" maxlength="45" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                        <input wire:model.live="editForm.password_confirmation" type="text" id="password_confirmation" minlength="8" maxlength="45" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
                     </div>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                 Actualizar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     @push('scripts')
         <script>

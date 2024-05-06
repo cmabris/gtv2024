@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire\Admin\User;
 
-use App\Http\Livewire\Admin\User\CreateUser;
+use App\Livewire\Admin\User\CreateUser;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;

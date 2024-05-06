@@ -358,7 +358,7 @@
 
 
     {{-- Modal showVideos --}}
-    <x-jet-dialog-modal wire:model="detailsModalVideos.open">
+    <x-dialog-modal wire:model.live="detailsModalVideos.open">
         <x-slot name="title">
             <span class="text-2xl">Detalles del vídeo #{{ $detailsModalVideos['id'] }}</span>
         </x-slot>
@@ -369,58 +369,58 @@
                     @livewire('admin.video.video-preview', ['route' => $detailsModalVideos['route']])
                 @endif
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Descripción: {{ $detailsModalVideos['description']}}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Ruta: {{ $detailsModalVideos['route'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Orden: {{ $detailsModalVideos['order'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Punto de interés: {{ $detailsModalVideos['pointOfInterest'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         @if( ! empty($detailsModalVideos['thematicAreaId']))
                             Área temática: {{ $detailsModalVideos['thematicAreaName'] }} ({{ $detailsModalVideos['thematicAreaId'] }})
                         @else
                             Área temática: <span class="text-red-600">Sin área temática</span>
                         @endif
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Creador: {{ $detailsModalVideos['creatorName'] }} ({{ $detailsModalVideos['creatorId'] }})
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Actualizador:
                         @if($detailsModalVideos['updaterName'])
                             {{ $detailsModalVideos['updaterName'] }} ({{ $detailsModalVideos['updaterId'] }})
                         @else
                             {{ 'ninguno' }}
                         @endif
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de creación: {{ $detailsModalVideos['createdAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de actualización: {{ $detailsModalVideos['updatedAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
             </div>
         </x-slot>
@@ -430,10 +430,10 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     {{-- Modal showTemathicAreas --}}
-    <x-jet-dialog-modal wire:model="detailsModalAreas.open">
+    <x-dialog-modal wire:model.live="detailsModalAreas.open">
         <x-slot name="title">
             <span class="text-2xl">Detalle del área temática #{{ $detailsModalAreas['id'] }}</span>
         </x-slot>
@@ -441,32 +441,32 @@
         <x-slot name="content">
             <div class="space-y-6">
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Nombre: {{ $detailsModalAreas['name'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Descripción: {{ $detailsModalAreas['description'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Fecha de creación: {{ $detailsModalAreas['createdAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
                     @if($detailsModalAreas['updatedAt'] == NULL)
-                        <x-jet-label>
+                        <x-label>
                             Fecha de actualización: No se ha actualizado
-                        </x-jet-label>
+                        </x-label>
                     @else
-                    <x-jet-label>
+                    <x-label>
                         Fecha de actualización: {{ $detailsModalAreas['updatedAt'] }}
-                    </x-jet-label>
+                    </x-label>
                     @endif
                 </div>
             </div>
@@ -477,10 +477,10 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     {{-- Modal showUsers --}}
-    <x-jet-dialog-modal wire:model="detailsModalUsers.open">
+    <x-dialog-modal wire:model.live="detailsModalUsers.open">
         <x-slot name="title">
             <span class="text-2xl">Detalles del usuario #{{ $detailsModalUsers['id'] }}</span>
         </x-slot>
@@ -497,29 +497,29 @@
                     @endif
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Nombre: {{ $detailsModalUsers['name']}}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Email: {{ $detailsModalUsers['email'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Rol: {{ $detailsModalUsers['rol'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de creación: {{ $detailsModalUsers['createdAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de actualización: {{ $detailsModalUsers['updatedAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
             </div>
         </x-slot>
@@ -529,10 +529,10 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     {{-- Modal showVisits --}}
-    <x-jet-dialog-modal wire:model="detailsModalVisits.open">
+    <x-dialog-modal wire:model.live="detailsModalVisits.open">
         <x-slot name="title">
             <span class="text-2xl">Detalles de la Visita #{{ $detailsModalVisits['id'] }}</span>
         </x-slot>
@@ -540,40 +540,40 @@
         <x-slot name="content">
             <div class="space-y-3">
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Hora: {{ $detailsModalVisits['hour']}}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Id Dispositivo: {{ $detailsModalVisits['deviceid'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Version de la App: {{ $detailsModalVisits['appversion'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Agente: {{ $detailsModalVisits['useragent'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Sistema Operativo: {{ $detailsModalVisits['ssoo'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Version Sistema Operativo: {{ $detailsModalVisits['ssooversion'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Punto de Interest:
                         {!!QrCode::size(100)->generate(json_encode($detailsModalVisits['point_of_interest_id'], JSON_PRETTY_PRINT)) !!}
-                    </x-jet-label>
+                    </x-label>
                 </div>
             </div>
         </x-slot>
@@ -583,10 +583,10 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     {{-- Modal showPoints --}}
-    <x-jet-dialog-modal wire:model="detailsModalPoints.open">
+    <x-dialog-modal wire:model.live="detailsModalPoints.open">
         <x-slot name="title">
             <span class="text-2xl">Detalles del Punto de Interes #{{ $detailsModalPoints['id'] }}</span>
         </x-slot>
@@ -594,49 +594,49 @@
         <x-slot name="content">
             <div class="space-y-3">
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Distancia: {{ $detailsModalPoints['distance']}}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Latitud: {{ $detailsModalPoints['latitude'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Longitud: {{ $detailsModalPoints['longitude'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Sitio: {{ $detailsModalPoints['placeName'] }} ({{ $detailsModalPoints['placeId'] }})
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Creador: {{ $detailsModalPoints['creatorName'] }} ({{ $detailsModalPoints['creatorId'] }})
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Actualizador:
                         @if($detailsModalPoints['updaterName'])
                             {{ $detailsModalPoints['updaterName'] }} ({{ $detailsModalPoints['updaterId'] }})
                         @else
                             {{ 'ninguno' }}
                         @endif
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de creación: {{ $detailsModalPoints['createdAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de actualización: {{ $detailsModalPoints['updatedAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
             </div>
         </x-slot>
@@ -646,10 +646,10 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     {{-- Modal showPlaces --}}
-    <x-jet-dialog-modal wire:model="detailsModalPlaces.open">
+    <x-dialog-modal wire:model.live="detailsModalPlaces.open">
         <x-slot name="title">
             <span class="text-2xl">Detalles del lugar #{{ $detailsModalPlaces['id'] }}</span>
         </x-slot>
@@ -657,44 +657,44 @@
         <x-slot name="content">
             <div class="space-y-3">
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         ID: {{ $detailsModalPlaces['id']}}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Nombre: {{ $detailsModalPlaces['name']}}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Descripción: {{ $detailsModalPlaces['description']}}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Creador: {{ $detailsModalPlaces['creatorName'] }} ({{ $detailsModalPlaces['creatorId'] }})
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Actualizador:
                         @if($detailsModalPlaces['updaterName'])
                             {{ $detailsModalPlaces['updaterName'] }} ({{ $detailsModalPlaces['updaterId'] }})
                         @else
                             {{ 'ninguno' }}
                         @endif
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de creación: {{ $detailsModalPlaces['createdAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Última actualización: {{ $detailsModalPlaces['updatedAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
             </div>
         </x-slot>
@@ -704,10 +704,10 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     {{-- Modal showPhotographies--}}
-    <x-jet-dialog-modal wire:model="detailsModalPhotographies.open">
+    <x-dialog-modal wire:model.live="detailsModalPhotographies.open">
         <x-slot name="title">
             <span class="text-2xl">Detalle de la fotografía #{{ $detailsModalPhotographies['id'] }}</span>
         </x-slot>
@@ -721,58 +721,58 @@
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Ruta: {{ $detailsModalPhotographies['route'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Orden: {{ $detailsModalPhotographies['order'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Punto de interes: {{ $detailsModalPhotographies['pointOfInterestId'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         @if( ! empty($detailsModalPhotographies['thematicAreaId']))
                             Área temática: {{ $detailsModalPhotographies['thematicAreaName'] }} (ID: {{ $detailsModalPhotographies['thematicAreaId'] }})
                         @else
                             Área temática: <span class="text-red-600">Sin área temática</span>
                         @endif
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Creador: {{ $detailsModalPhotographies['creatorName'] }} (ID: {{ $detailsModalPhotographies['creatorId'] }})
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 @if( ! is_null($detailsModalPhotographies['updaterId']))
                     <div class="mb-4">
-                        <x-jet-label>
+                        <x-label>
                             Actualizador: {{ $detailsModalPhotographies['updaterName'] }} (ID: {{ $detailsModalPhotographies['updaterId'] }})
-                        </x-jet-label>
+                        </x-label>
                     </div>
                 @endif
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Fecha de creación: {{ $detailsModalPhotographies['createdAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 @if( ! is_null($detailsModalPhotographies['updaterId']))
                     <div class="mb-4">
-                        <x-jet-label>
+                        <x-label>
                             Fecha de actualización: {{ $detailsModalPhotographies['updatedAt'] }}
-                        </x-jet-label>
+                        </x-label>
                     </div>
                 @endif
             </div>
@@ -783,5 +783,5 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 </div>

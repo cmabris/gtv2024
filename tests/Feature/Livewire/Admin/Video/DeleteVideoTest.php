@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire\Admin\Video;
 
-use App\Http\Livewire\Admin\Video\ListVideos;
+use App\Livewire\Admin\Video\ListVideos;
 use Livewire\Livewire;
 use Tests\TestCase;
 

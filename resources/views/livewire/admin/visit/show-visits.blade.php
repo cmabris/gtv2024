@@ -7,7 +7,7 @@
         <div class="inline">
             <select class="text-black  bg-blue-100 hover:bg-grey-200 focus:ring-4 focus:ring-blue-300
                     font-medium rounded-lg text-sm py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700
-                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model="searchColumn">
+                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model.live="searchColumn">
                 <option value="id">ID</option>
                 <option value="deviceid">DEVICE ID</option>
                 <option value="ssoo">SSOO</option>
@@ -17,10 +17,10 @@
             </select>
         </div>
 
-        <x-jet-input class="py-1 border-black" type="text" wire:model="search"
-                     placeholder="Buscar ..."></x-jet-input>
+        <x-input class="py-1 border-black" type="text" wire:model.live="search"
+                     placeholder="Buscar ..."></x-input>
 
-        <x-jet-button wire:click="resetFilters">Eliminar filtros</x-jet-button>
+        <x-button wire:click="resetFilters">Eliminar filtros</x-button>
     </div>
 
     @if(count($visits))
@@ -124,7 +124,7 @@
     @endif
 
     {{-- Modal show --}}
-    <x-jet-dialog-modal wire:model="detailsModal.open">
+    <x-dialog-modal wire:model.live="detailsModal.open">
         <x-slot name="title">
             <span class="text-2xl">Detalles de la Visita #{{ $detailsModal['id'] }}</span>
         </x-slot>
@@ -132,40 +132,40 @@
         <x-slot name="content">
             <div class="space-y-3">
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Hora: {{ $detailsModal['hour']}}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Id Dispositivo: {{ $detailsModal['deviceid'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Version de la App: {{ $detailsModal['appversion'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Agente: {{ $detailsModal['useragent'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Sistema Operativo: {{ $detailsModal['ssoo'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Version Sistema Operativo: {{ $detailsModal['ssooversion'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Punto de Interest:
                         {!!QrCode::size(100)->generate(json_encode($detailsModal['point_of_interest_id'], JSON_PRETTY_PRINT)) !!}
-                    </x-jet-label>
+                    </x-label>
                 </div>
             </div>
         </x-slot>
@@ -175,5 +175,5 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 </div>

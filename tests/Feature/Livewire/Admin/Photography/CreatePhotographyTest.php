@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\Admin\Photography\Photographies;
+use App\Livewire\Admin\Photography\Photographs;
 use Illuminate\Http\UploadedFile;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -23,7 +23,7 @@ class CreatePhotographyTest extends TestCase
 
         $file = UploadedFile::fake()->create('photography.png', 1, 'image/png');
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->set('createForm.route', $file)
             ->set('createForm.pointOfInterestId', $pointOfInterest->id)
             ->set('createForm.thematicAreaId', $thematicArea->id)
@@ -54,7 +54,7 @@ class CreatePhotographyTest extends TestCase
 
         $file = UploadedFile::fake()->create('photography.png', 1, 'image/png');
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->set('createForm.pointOfInterestId', $pointOfInterest->id)
             ->set('createForm.thematicAreaId', $thematicArea->id)
             ->call('save')
@@ -77,7 +77,7 @@ class CreatePhotographyTest extends TestCase
 
         $file = UploadedFile::fake()->create('photography.png', 1, 'image/png');
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->set('createForm.route', $file)
             ->set('createForm.thematicAreaId', $thematicArea->id)
             ->call('save')
@@ -100,7 +100,7 @@ class CreatePhotographyTest extends TestCase
 
         $file = UploadedFile::fake()->create('photography.png', 1, 'image/png');
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->set('createForm.route', $file)
             ->call('save')
             ->assertHasErrors(['createForm.thematicAreaId' => 'required']);
@@ -122,7 +122,7 @@ class CreatePhotographyTest extends TestCase
 
         $file = UploadedFile::fake()->create('photography.png', 1, 'image/png');
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->set('createForm.route', $file)
             ->set('createForm.thematicAreaId', 'asd')
             ->call('save')
@@ -145,7 +145,7 @@ class CreatePhotographyTest extends TestCase
 
         $file = UploadedFile::fake()->create('photography.png', 1, 'image/png');
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->set('createForm.route', $file)
             ->set('createForm.pointOfInterestId', $pointOfInterest->id)
             ->set('createForm.thematicAreaId', 'asd')

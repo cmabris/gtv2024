@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire\Admin\Place;
 
-use App\Http\Livewire\Admin\Places\CreatePlace;
+use App\Livewire\Admin\Places\CreatePlace;
 use Livewire\Livewire;
 use Tests\TestCase;
 

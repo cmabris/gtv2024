@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Livewire\Admin\Photography\Photographies;
+use App\Livewire\Admin\Photography\Photographs;
 use App\Models\Photography;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -38,7 +38,7 @@ class UpdatePhotographyTest extends TestCase
         $pointOfInterestB = $this->createPointOfInterest($place->id);
         $thematicAreaB = $this->createThematicArea($pointOfInterestB->id);
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->set('editForm.pointOfInterestId', $pointOfInterestB->id)
             ->set('editForm.thematicAreaId', $thematicAreaB->id)
             ->call('update', $photographyA);
@@ -83,7 +83,7 @@ class UpdatePhotographyTest extends TestCase
         $pointOfInterestB = $this->createPointOfInterest($place->id);
         $thematicAreaB = $this->createThematicArea($pointOfInterestB->id);
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->set('editForm.thematicAreaId', $thematicAreaB->id)
             ->call('update', $photographyA)
             ->assertHasErrors(['editForm.pointOfInterestId' => 'required']);
@@ -128,7 +128,7 @@ class UpdatePhotographyTest extends TestCase
         $pointOfInterestB = $this->createPointOfInterest($place->id);
         $thematicAreaB = $this->createThematicArea($pointOfInterestB->id);
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->call('update', $photographyA)
             ->assertHasErrors(['editForm.thematicAreaId' => 'required']);
 
@@ -172,7 +172,7 @@ class UpdatePhotographyTest extends TestCase
         $pointOfInterestB = $this->createPointOfInterest($place->id);
         $thematicAreaB = $this->createThematicArea($pointOfInterestB->id);
 
-        Livewire::test(Photographies::class)
+        Livewire::test(Photographs::class)
             ->set('editForm.pointOfInterestId', $pointOfInterestB->id)
             ->set('editForm.thematicAreaId', 'asd')
             ->call('update', $photographyA)

@@ -13,7 +13,7 @@
         <div class="inline">
             <select class="text-black  bg-blue-100 hover:bg-grey-200 focus:ring-4 focus:ring-blue-300
                     font-medium rounded-lg text-sm py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700
-                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model="searchColumn">
+                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model.live="searchColumn">
                 <option value="id">ID</option>
                 <option value="description">DESCRIPCIÓN</option>
                 <option value="point_of_interest_id">PUNTO DE INTERÉS</option>
@@ -24,10 +24,10 @@
             </select>
         </div>
 
-        <x-jet-input class="py-1 border-black" type="text" wire:model="search"
-                     placeholder="Buscar ..."></x-jet-input>
+        <x-input class="py-1 border-black" type="text" wire:model.live="search"
+                     placeholder="Buscar ..."></x-input>
 
-        <x-jet-button wire:click="resetFilters">Eliminar filtros</x-jet-button>
+        <x-button wire:click="resetFilters">Eliminar filtros</x-button>
     </div>
 
     @livewire('admin.video.create-video')
@@ -147,7 +147,7 @@
                                 <i class="fa-solid fa-pencil"></i>
                             </span>
                             <span class="font-medium text-red-500 cursor-pointer"
-                               wire:click="$emit('deleteVideo', '{{ $video->id }}')">
+                               wire:click="$dispatch('deleteVideo', '{{ $video->id }}')">
                                 <i class="fa-solid fa-trash"></i>
                             </span>
                         </td>
@@ -166,7 +166,7 @@
     @endif
 
     {{-- Modal show --}}
-    <x-jet-dialog-modal wire:model="detailsModal.open">
+    <x-dialog-modal wire:model.live="detailsModal.open">
         <x-slot name="title">
             <span class="text-2xl">Detalles del vídeo #{{ $detailsModal['id'] }}</span>
         </x-slot>
@@ -177,62 +177,62 @@
                     @livewire('admin.video.video-preview', ['route' => $detailsModal['route']])
                 @endif
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Descripción: {{ $detailsModal['description']}}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Ruta: {{ $detailsModal['route'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Orden: {{ $detailsModal['order'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         @if( ! empty($detailsModal['pointOfInterest']))
                             Punto de interés: {{ $detailsModal['pointOfInterest'] }}
                         @else
                             Punto de interés: <span class="text-red-600">Ninguno</span>
                         @endif
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         @if( ! empty($detailsModal['thematicAreaId']) && ! empty($detailsModal['pointOfInterest']))
                             Área temática: {{ $detailsModal['thematicAreaName'] }} ({{ $detailsModal['thematicAreaId'] }})
                         @else
                             Área temática: <span class="text-red-600">Ninguna</span>
                         @endif
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Creador: {{ $detailsModal['creatorName'] }} ({{ $detailsModal['creatorId'] }})
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Actualizador:
                         @if($detailsModal['updaterName'])
                             {{ $detailsModal['updaterName'] }} ({{ $detailsModal['updaterId'] }})
                         @else
                             {{ 'ninguno' }}
                         @endif
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de creación: {{ $detailsModal['createdAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de actualización: {{ $detailsModal['updatedAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
             </div>
         </x-slot>
@@ -242,7 +242,7 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     @push('scripts')
         <script>

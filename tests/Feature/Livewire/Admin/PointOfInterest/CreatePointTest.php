@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire\Admin\PointOfInterest;
 
-use App\Http\Livewire\Admin\Point\CreatePoint;
+use App\Livewire\Admin\Point\CreatePoint;
 use App\Models\Video;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;

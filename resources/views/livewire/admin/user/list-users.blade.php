@@ -15,7 +15,7 @@
         <div class="inline">
             <select class="text-black  bg-blue-100 hover:bg-grey-200 focus:ring-4 focus:ring-blue-300
                     font-medium rounded-lg text-sm py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700
-                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model="searchColumn">
+                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model.live="searchColumn">
                 <option value="id">ID</option>
                 <option value="name">NOMBRE</option>
                 <option value="created_at">FECHA DE CREACIÓN</option>
@@ -23,10 +23,10 @@
             </select>
         </div>
 
-        <x-jet-input class="py-1 border-black" type="text" wire:model="search"
-                     placeholder="Buscar ..."></x-jet-input>
+        <x-input class="py-1 border-black" type="text" wire:model.live="search"
+                     placeholder="Buscar ..."></x-input>
 
-        <x-jet-button wire:click="resetFilters">Eliminar filtros</x-jet-button>
+        <x-button wire:click="resetFilters">Eliminar filtros</x-button>
     </div>
 
     @livewire('admin.user.create-user')
@@ -124,7 +124,7 @@
                                 <i class="fa-solid fa-pencil"></i>
                             </span>
                             <span class="font-medium text-red-500 cursor-pointer"
-                                  wire:click="$emit('deleteUser', '{{ $user->id }}')">
+                                  wire:click="$dispatch('deleteUser', '{{ $user->id }}')">
                                 <i class="fa-solid fa-trash"></i>
                             </span>
                         </td>
@@ -143,7 +143,7 @@
     @endif
 
     {{-- Modal show --}}
-    <x-jet-dialog-modal wire:model="detailsModal.open">
+    <x-dialog-modal wire:model.live="detailsModal.open">
         <x-slot name="title">
             <span class="text-2xl">Detalles del usuario #{{ $detailsModal['id'] }}</span>
         </x-slot>
@@ -160,29 +160,29 @@
                     @endif
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Nombre: {{ $detailsModal['name']}}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Email: {{ $detailsModal['email'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Rol: {{ $user->roles->first()->name }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de creación: {{ $detailsModal['createdAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Fecha de actualización: {{ $detailsModal['updatedAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
             </div>
         </x-slot>
@@ -192,7 +192,7 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     @push('scripts')
         <script>

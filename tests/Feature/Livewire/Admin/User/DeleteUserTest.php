@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire\Admin\User;
 
-use App\Http\Livewire\Admin\User\ListUsers;
+use App\Livewire\Admin\User\ListUsers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

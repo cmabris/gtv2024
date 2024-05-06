@@ -15,7 +15,7 @@
             <div class="inline">
                 <select class="text-black  bg-blue-100 hover:bg-grey-200 focus:ring-4 focus:ring-blue-300
                     font-medium rounded-lg text-sm py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700
-                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model="searchColumn">
+                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model.live="searchColumn">
                     <option value="id">ID</option>
                     <option value="name">NOMBRE</option>
                     <option value="description">DESCRIPCIÓN</option>
@@ -24,10 +24,10 @@
                 </select>
             </div>
 
-            <x-jet-input class="py-1 border-black" type="text" wire:model="search"
-                placeholder="Buscar ..."></x-jet-input>
+            <x-input class="py-1 border-black" type="text" wire:model.live="search"
+                placeholder="Buscar ..."></x-input>
 
-            <x-jet-button wire:click="resetFilters">Eliminar filtros</x-jet-button>
+            <x-button wire:click="resetFilters">Eliminar filtros</x-button>
 
         </div>
 
@@ -106,7 +106,7 @@
                                     <i class="fa-solid fa-pencil"></i>
                                 </span>
                                     <span class="font-medium text-red-500 cursor-pointer"
-                                          wire:click="$emit('deleteThematicArea', '{{ $thematicArea->id }}')">
+                                          wire:click="$dispatch('deleteThematicArea', '{{ $thematicArea->id }}')">
                                     <i class="fa-solid fa-trash"></i>
                                 </span>
                             </td>
@@ -125,7 +125,7 @@
         @endif
     </div>
 
-    <x-jet-dialog-modal wire:model="showModal.open">
+    <x-dialog-modal wire:model.live="showModal.open">
         <x-slot name="title">
             <span class="text-2xl">Detalle del área temática #{{ $showModal['id'] }}</span>
         </x-slot>
@@ -133,27 +133,27 @@
         <x-slot name="content">
             <div class="space-y-6">
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Nombre: {{ $showModal['name'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Descripción: {{ $showModal['description'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Fecha de creación: {{ $showModal['createdAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
 
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Fecha de actualización: {{ $showModal['updatedAt'] }}
-                    </x-jet-label>
+                    </x-label>
                 </div>
             </div>
         </x-slot>
@@ -163,9 +163,9 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
-    <x-jet-dialog-modal wire:model="createForm.open">
+    <x-dialog-modal wire:model.live="createForm.open">
         <x-slot name="title">
             <span class="text-2xl">Crear área temática</span>
         </x-slot>
@@ -173,25 +173,25 @@
         <x-slot name="content">
             <div class="space-y-6">
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Nombre
-                    </x-jet-label>
+                    </x-label>
 
-                    <input wire:model="createForm.name" type="text" id="name" minlength="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <input wire:model.live="createForm.name" type="text" id="name" minlength="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
 
-                    <x-jet-input-error for="createForm.name" class="mt-2" />
+                    <x-input-error for="createForm.name" class="mt-2" />
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Descripción
-                    </x-jet-label>
+                    </x-label>
 
-                    <textarea wire:model="createForm.description" rows="4" class="block p-2.5 w-full
+                    <textarea wire:model.live="createForm.description" rows="4" class="block p-2.5 w-full
                     text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500
                     focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1"></textarea>
 
-                    <x-jet-input-error for="createForm.description" class="mt-2" />
+                    <x-input-error for="createForm.description" class="mt-2" />
                 </div>
             </div>
         </x-slot>
@@ -204,9 +204,9 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
-    <x-jet-dialog-modal wire:model="editModal.open">
+    <x-dialog-modal wire:model.live="editModal.open">
         <x-slot name="title">
             <span class="text-2xl">Actualizar área temática</span>
         </x-slot>
@@ -214,25 +214,25 @@
         <x-slot name="content">
             <div class="space-y-6">
                 <div class="mb-4">
-                    <x-jet-label>
+                    <x-label>
                         Nombre
-                    </x-jet-label>
+                    </x-label>
 
-                    <input wire:model="editForm.name" type="text" id="name" minlength="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <input wire:model.live="editForm.name" type="text" id="name" minlength="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
 
-                    <x-jet-input-error for="editForm.name" class="mt-2" />
+                    <x-input-error for="editForm.name" class="mt-2" />
                 </div>
                 <div>
-                    <x-jet-label>
+                    <x-label>
                         Descripción
-                    </x-jet-label>
+                    </x-label>
 
-                    <textarea wire:model="editForm.description" rows="4" class="block p-2.5 w-full
+                    <textarea wire:model.live="editForm.description" rows="4" class="block p-2.5 w-full
                     text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500
                     focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400
                     dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mt-1"></textarea>
 
-                    <x-jet-input-error for="editForm.description" class="mt-2" />
+                    <x-input-error for="editForm.description" class="mt-2" />
                 </div>
             </div>
         </x-slot>
@@ -245,7 +245,7 @@
                 Cerrar
             </x-button>
         </x-slot>
-    </x-jet-dialog-modal>
+    </x-dialog-modal>
 
     @push('scripts')
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

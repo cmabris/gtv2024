@@ -5,7 +5,7 @@
         <div class="inline">
             <select class="text-black  bg-blue-100 hover:bg-grey-200 focus:ring-4 focus:ring-blue-300
                     font-medium rounded-lg text-sm py-1.5 dark:bg-blue-600 dark:hover:bg-blue-700
-                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model="searchColumn">
+                    focus:outline-none dark:focus:ring-blue-800 ml-auto" wire:model.live="searchColumn">
                 <option value="id">ID</option>
                 <option value="video_id">ID VIDEO</option>
                 <option value="quality">CALIDAD</option>
@@ -15,10 +15,10 @@
             </select>
         </div>
 
-        <x-jet-input class="py-1 border-black" type="text" wire:model="search"
-                     placeholder="Buscar ..."></x-jet-input>
+        <x-input class="py-1 border-black" type="text" wire:model.live="search"
+                     placeholder="Buscar ..."></x-input>
 
-        <x-jet-button wire:click="resetFilters">Eliminar filtros</x-jet-button>
+        <x-button wire:click="resetFilters">Eliminar filtros</x-button>
     </div>
 
     @if(count($videoItems))

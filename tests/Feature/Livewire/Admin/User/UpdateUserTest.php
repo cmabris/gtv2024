@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire\Admin\User;
 
-use App\Http\Livewire\Admin\User\EditUser;
+use App\Livewire\Admin\User\EditUser;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 use App\Models\User;

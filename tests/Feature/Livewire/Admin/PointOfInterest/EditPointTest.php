@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire\Admin\PointOfInterest;
 
-use App\Http\Livewire\Admin\Point\EditPoint;
+use App\Livewire\Admin\Point\EditPoint;
 use App\Models\PointOfInterest;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
