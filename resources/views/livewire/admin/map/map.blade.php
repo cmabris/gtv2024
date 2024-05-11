@@ -26,12 +26,13 @@
         var map = L.map('map', {
             minZoom: 1.5, // Establece el zoom mínimo permitido
             maxZoom: 18, // Establece el zoom máximo permitido
-            maxBounds: bounds // Establece los límites máximos del mapa
+            maxBounds: bounds, // Establece los límites máximos del mapa
+            lang: 'es' // Establece el idioma del mapa a español
         }).setView([initialLat, initialLng], 10); // Se ajustó el nivel de zoom a 10
 
-        // Agregar la capa de OpenStreetMap al mapa
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        // Agregar la capa de basemaps al mapa ya que con esta si que aparece en español
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://carto.com/"></a> ',
             noWrap: true // Configuración para evitar que los azulejos se envuelvan horizontalmente
         }).addTo(map);
 
