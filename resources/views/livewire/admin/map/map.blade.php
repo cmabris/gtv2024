@@ -36,7 +36,13 @@
         @foreach($points as $point)
         L.marker([{{ $point->latitude }}, {{ $point->longitude }}])
             .addTo(map)
-            .bindPopup('Distancia: {{ $point->distance }} km<br>Latitud: {{ $point->latitude }}<br>Longitud: {{ $point->longitude }}');
+            .bindPopup(
+                '<img src="{{ $point->photographies->first()->route ?? '' }}" alt="Fotografía del punto de interés">'+
+                '<br><b>Nombre:</b> {{ $point->name }}'+
+                '<br><b>Descripción del lugar:</b> {{ $point->place->description }}'+
+                '<br><b>Latitud:</b> {{ $point->latitude }}'+
+                '<br><b>Longitud:</b> {{ $point->longitude }}'
+            );
         @endforeach
     </script>
 @endpush
