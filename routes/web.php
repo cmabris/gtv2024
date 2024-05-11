@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Livewire\Admin\Map\Map;
 use App\Http\Livewire\Admin\Point\ShowPoint;
 use App\Http\Livewire\Admin\Photography\Photographies;
 use App\Http\Livewire\Admin\Places\ListPlaces;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'admin'], function () {
     Route::get('users', ListUsers::class)->name('users.index');
     Route::get('video-items', ListVideoItems::class)->name('video-items.index');
+    Route::get('map', Map::class)->name('map');
 });
 
 Route::group(['middleware' => 'admin_or_teacher'], function () {
