@@ -1,6 +1,4 @@
-<!-- SI QUIERES COMPROBAR QUE FUNCIONA COPIA EL CODIGO A LA VISTA show-point.blade.php -->
-
-<div style="width: 100%; height: 60vh;">
+<div style="width: 100%; height: 80vh;">
     <div id="map" style="width: 100%; height: 100%;"></div>
 </div>
 
@@ -22,18 +20,16 @@
         var northEast = L.latLng(90, 180);
         var bounds = L.latLngBounds(southWest, northEast);
 
-        // Inicializar el mapa Leaflet centrado en la primera coordenada y con límites máximos
+        // // Inicializar el mapa Leaflet centrado en la primera coordenada y con límites máximos
         var map = L.map('map', {
             minZoom: 1.5, // Establece el zoom mínimo permitido
             maxZoom: 18, // Establece el zoom máximo permitido
-            maxBounds: bounds, // Establece los límites máximos del mapa
-            lang: 'es' // Establece el idioma del mapa a español
+            maxBounds: bounds // Establece los límites máximos del mapa
         }).setView([initialLat, initialLng], 10); // Se ajustó el nivel de zoom a 10
 
         // Agregar la capa de basemaps al mapa ya que con esta si que aparece en español
-        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png', {
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://carto.com/"></a> ',
-            noWrap: true // Configuración para evitar que los azulejos se envuelvan horizontalmente
         }).addTo(map);
 
         // Iterar sobre los puntos y agregar marcadores
