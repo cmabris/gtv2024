@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
         $adminRole = Role::create(['name' => 'Administrador']);
         $teacherRole = Role::create(['name' => 'Profesor']);
         $studentRole = Role::create(['name' => 'Alumno']);
+        $gtvisorRole = Role::create(['name' => 'GTVisor']);
 
         $admin = User::create([
             'name' => 'Admin',
@@ -42,5 +43,12 @@ class UserSeeder extends Seeder
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         ]);
         $student->assignRole($studentRole);
+
+        $gtvisor = User::create([
+            'name' => 'GTVisor',
+            'email' => 'gtvisor@mail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        ]);
+        $gtvisor->assignRole($gtvisorRole);
     }
 }
