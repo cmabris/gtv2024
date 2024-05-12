@@ -324,8 +324,7 @@ class Welcome extends Component
                 ->orderByDesc('id')
                 ->paginate(3);
         } else {
-            $points = PointOfInterest::orderByDesc('id')
-                ->paginate(3);
+            $points = PointOfInterest::all();
         }
 
         if( ! auth()->user()->hasRole('Alumno')) {

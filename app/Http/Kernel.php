@@ -4,6 +4,7 @@ namespace App\Http;
 
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\AdminOrTeacherMiddleware;
+use App\Http\Middleware\AdminOrTeacherOrStudentMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -69,6 +70,7 @@ class Kernel extends HttpKernel
         'role_or_permission' => \Spatie\Permission\Middlewares\RoleOrPermissionMiddleware::class,
         'admin' => AdminMiddleware::class,
         'admin_or_teacher' => AdminOrTeacherMiddleware::class,
+        'admin_or_teacher_or_student' => AdminOrTeacherOrStudentMiddleware::class,
     ];
 
     /**
