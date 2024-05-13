@@ -150,6 +150,8 @@
                                     @role('Administrador')
                                     (ID: {{ \App\Models\User::find($photography->updater)->id }})
                                     @endrole
+                                @else
+                                    <p class="text-center"> N/A</p>
                                 @endif
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
@@ -158,6 +160,8 @@
                             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                 @if($photography->updater)
                                     {{ $photography->updated_at }}
+                                @else
+                                    <p class="text-center"> N/A</p>
                                 @endif
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">

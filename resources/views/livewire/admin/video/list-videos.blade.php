@@ -86,6 +86,7 @@
                         <i class="fa-solid fa-arrow-up">
                             @elseif($sortField === 'updater' && $sortDirection === 'desc')
                                 <i class="fa-solid fa-arrow-down"></i>
+
                     @endif
                 </th>
                 <th scope="col" class="px-6 py-3 cursor-pointer" wire:click="sort('created_at')">
@@ -133,6 +134,8 @@
                         <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                             @if($video->updater)
                                 {{ \App\Models\User::find($video->updater)->name }}
+                            @else
+                                <p class="text-center"> N/A</p>
                             @endif
                         </td>
                         <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
