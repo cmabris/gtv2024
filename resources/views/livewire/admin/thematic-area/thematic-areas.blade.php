@@ -95,7 +95,12 @@
                                 {{ $thematicArea->created_at }}
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                {{ $thematicArea->updated_at }}
+
+                                @if($thematicArea->updated_at)
+                                    {{ $thematicArea->updated_at }}
+                                @else
+                                    <p class="text-center"> N/A</p>
+                                @endif
                             </td>
                             <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap flex gap-4">
                                 <span class="font-medium text-blue-600 cursor-pointer" wire:click="show('{{ $thematicArea->id }}')">
