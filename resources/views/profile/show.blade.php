@@ -44,9 +44,12 @@
             <x-jet-section-border />
 
             <div class="mt-10 sm:mt-0">
-                @livewire('create-gtvisor-user')
+                @if(auth()->user()->hasRole('GTVisor'))
+                    @livewire('profile.revert-gtvisor-user')
+                @else
+                    @livewire('profile.create-gtvisor-user')
+                @endif
             </div>
         </div>
     </div>
 </x-app-layout>
-

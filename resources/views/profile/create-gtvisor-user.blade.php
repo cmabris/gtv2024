@@ -4,29 +4,28 @@
     </x-slot>
 
     <x-slot name="description">
-        {{ __('Change a gtvisor user.') }}
+        {{ __('Change to a GTVisor user.') }}
     </x-slot>
 
     <x-slot name="content">
         <div class="max-w-xl text-sm text-gray-600">
-            {{ __('Once you click this button, the user will become a gtvisor user and will be able to access the map menu. If you want to go back to being a user you were before, go back to the profile and you will have a button that will return you to your original user.') }}
+            {{ __('Once you click this button, you will become a GTVisor user and will have access to the map menu. To revert, go back to the profile and you will have a button to return to your original role.') }}
         </div>
 
         <div class="mt-5">
             <x-jet-button wire:click="confirmChangeUser" wire:loading.attr="disabled">
                 {{ __('Change') }}
-            </x-jet-danger-button>
+            </x-jet-button>
         </div>
 
         <!-- Change User Confirmation Modal -->
         <x-jet-dialog-modal wire:model="confirmingUserDeletion">
             <x-slot name="title">
-                {{ __('Change gtvisor') }}
+                {{ __('Change to GTVisor') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Are you sure about that, if you want to go back to being a user you were before, go back to the profile and you will have a button that will return you to your original user.') }}
-
+                {{ __('Are you sure you want to change your role to GTVisor?') }}
             </x-slot>
 
             <x-slot name="footer">
@@ -34,9 +33,9 @@
                     {{ __('Cancel') }}
                 </x-jet-secondary-button>
 
-                <x-jet-danger-button class="ml-3" wire:click="changeUser" wire:loading.attr="disabled">
-                    {{ __('Change to gtvisor') }}
-                </x-jet-danger-button>
+                <x-jet-button class="ml-3" wire:click="changeUser" wire:loading.attr="disabled">
+                    {{ __('Change to GTVisor') }}
+                </x-jet-button>
             </x-slot>
         </x-jet-dialog-modal>
     </x-slot>
