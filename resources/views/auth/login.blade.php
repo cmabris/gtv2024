@@ -32,6 +32,11 @@
                 </label>
             </div>
 
+            <div class="block mt-4 flex items-center">
+                <span class="text-sm text-gray-600">{{ __('You are not logged in') }}</span>
+                <a href="{{ route('register') }}" class="ml-2 text-sm text-blue-600 underline">{{ __('Register') }}</a>
+            </div>
+
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))
                     <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
