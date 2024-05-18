@@ -40,6 +40,16 @@
                     @livewire('profile.delete-user-form')
                 </div>
             @endif
+
+            <x-jet-section-border />
+
+            <div class="mt-10 sm:mt-0">
+                @if(auth()->user()->hasRole('GTVisor'))
+                    @livewire('profile.revert-gtvisor-user')
+                @else
+                    @livewire('profile.create-gtvisor-user')
+                @endif
+            </div>
         </div>
     </div>
 </x-app-layout>
