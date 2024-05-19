@@ -18,7 +18,7 @@ class CreateGtvisorUser extends Component
     {
         $user = Auth::user();
         if ($user) {
-          
+
             $previousRole = $user->getRoleNames()->first();
             $user->previous_role = $previousRole;
             $user->save();

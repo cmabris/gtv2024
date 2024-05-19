@@ -18,8 +18,7 @@ class RevertGtvisorUser extends Component
     {
         $user = Auth::user();
         if ($user) {
-            
-            $previousRole = $user->previous_role ?? 'GTVisor'; 
+            $previousRole = $user->previous_role ?? 'GTVisor';
 
             $user->syncRoles([$previousRole]);
             session()->flash('message', 'Role reverted successfully.');
