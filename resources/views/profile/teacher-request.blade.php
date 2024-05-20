@@ -22,11 +22,11 @@
         <!-- Change User Confirmation Modal -->
         <x-jet-dialog-modal wire:model="SendEmailToAdmin">
             <x-slot name="title">
-                {{ __('Change to GTVisor') }}
+                {{ __('Petition to admin email') }}
             </x-slot>
 
             <x-slot name="content">
-                {{ __('Are you sure you want to change your role to GTVisor?') }}
+                {{ __('Are you sure you want to send a email to change your role to Teacher?') }}
             </x-slot>
 
             <x-slot name="footer">
@@ -35,7 +35,7 @@
                 </x-jet-secondary-button>
 
                 <x-jet-button class="ml-3" wire:click="sendEmail" wire:loading.attr="disabled">
-                    {{ __('Change to GTVisor') }}
+                    {{ __('Send email') }}
                 </x-jet-button>
             </x-slot>
         </x-jet-dialog-modal>
