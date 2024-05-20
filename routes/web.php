@@ -30,5 +30,4 @@ Route::group(['middleware' => 'admin_or_teacher_or_student'], function () {
     Route::get('photographies', Photographies::class)->name('photographies.index');
 });
 
-Route::group('email-cositas', [UserCreated::class, 'build']);
 Route::get('/', Welcome::class)->name('welcome');
