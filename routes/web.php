@@ -10,6 +10,7 @@ use App\Http\Livewire\Admin\Video\ListVideos;
 use App\Http\Livewire\Admin\VideoItem\ListVideoItems;
 use App\Http\Livewire\Admin\Visit\ShowVisits;
 use App\Http\Livewire\Welcome;
+use App\Mail\UserCreated;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => 'admin'], function () {
@@ -29,4 +30,8 @@ Route::group(['middleware' => 'admin_or_teacher_or_student'], function () {
     Route::get('photographies', Photographies::class)->name('photographies.index');
 });
 
+ /*   Route::get('email-cositas', function (){
+
+        return view('email.user-created');
+    } )->name('email-cositas');*/
 Route::get('/', Welcome::class)->name('welcome');
