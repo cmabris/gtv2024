@@ -69,7 +69,7 @@ class CreateUser extends Component
         $user = User::create([
             'name' => $this->createForm['name'],
             'email' => $this->createForm['email'],
-            'password'=> \bcrypt($this->createForm['password']),
+            'password'=> bcrypt($this->createForm['password']),
             'profile_photo_path' => $avatarRoute ?? null,
         ]);
 
@@ -77,7 +77,7 @@ class CreateUser extends Component
         $user->assignRole($role);
 
         ProcessUser::dispatch($user);
-        Mail::to('admin@mail.com')->send(new UserCreated($user));
+//        Mail::to('admin@mail.com')->send(new UserCreated($user));
 
         $this->reset('createForm');
         $this->emit('userCreated');
