@@ -35,7 +35,7 @@ class CreateNewUser implements CreatesNewUsers
         ]);
 
         // Asignar el rol de "student" al usuario
-        $user->syncRoles(['Alumno']);
+        $user->syncRoles(['GTVisor']);
 
         return $user;
     }
