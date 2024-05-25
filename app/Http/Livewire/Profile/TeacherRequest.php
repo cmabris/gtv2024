@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire\Profile;
 
-use App\Mail\UserCreated;
+use App\Mail\TeacherRequest as Teacher;
 use App\Models\EmailForAdmin;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
@@ -22,11 +22,12 @@ class TeacherRequest extends Component
         $user = Auth::user();
 
         if ($user) {
-
-            $mail = Mail::to('admin@mail.com')->send(new UserCreated($user));
+            $sender = $user->email;
+            $mail = Mail::to('admin@mail.com')->send(new Teacher($user));
             $mailBody = $mail->getMessage()->toString();
             EmailForAdmin::create([
-                'body' => $mailBody
+                'body' => $mailBody,
+                'from' => $sender,
             ]);
             return redirect()->route('welcome');
         } else {
