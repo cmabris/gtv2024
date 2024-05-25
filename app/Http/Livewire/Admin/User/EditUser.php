@@ -55,8 +55,6 @@ class EditUser extends Component
         $this->editForm['name'] = $user->name;
         $this->editForm['email'] = $user->email;
         $this->editForm['email_confirmation'] = $user->email;
-        $this->editForm['password'] = $user->password;
-        $this->editForm['password_confirmation'] = $user->password;
         $this->editForm['role'] = $user->roles->first()->id;
         $this->editForm['open'] = true;
     }
