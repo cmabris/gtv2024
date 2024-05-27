@@ -40,6 +40,12 @@ class ShowPoint extends Component
         'updatedAt' => null,
     ];
 
+    public $showMap = true;
+
+    public function toggleMapVisibility()
+    {
+        $this->showMap = !$this->showMap;
+    }
     public function show(PointOfInterest $point)
     {
         $this->detailsModal['open'] = true;
@@ -90,11 +96,11 @@ class ShowPoint extends Component
     public function render()
     {
         if (auth()->user()->hasRole('Alumno')) {
-            $points = PointOfInterest::where($this->searchColumn, 'like', '%'. $this->search .'%')
+            $points = PointOfInterest::where($this->searchColumn, 'like', '%' . $this->search . '%')
                 ->orderBy($this->sortField, $this->sortDirection)
                 ->paginate(10);
         } else {
-            $points = PointOfInterest::where($this->searchColumn, 'like', '%'. $this->search .'%')
+            $points = PointOfInterest::where($this->searchColumn, 'like', '%' . $this->search . '%')
                 ->orderBy($this->sortField, $this->sortDirection)
                 ->paginate(10);
         }
