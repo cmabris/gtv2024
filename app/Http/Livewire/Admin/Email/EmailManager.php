@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Admin\Email;
 
 use App\Models\EmailForAdmin as Email;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -13,6 +14,7 @@ class EmailManager extends Component
 
     public $showModal = false;
     public $email;
+    public $user;
     public $listeners = ['delete'];
 
     public $search;
@@ -45,6 +47,11 @@ class EmailManager extends Component
         'open' => false,
         'id' => null,
     ];
+
+    public function mount()
+    {
+        $this->user = Auth::user();
+    }
 
     public function show($id)
     {
@@ -127,12 +134,15 @@ class EmailManager extends Component
 
     public function render()
     {
-        if (auth()->user()->hasRole('Administrador') || auth()->user()->hasRole('Profesor')) {
+        if ($this->user->hasRole('Administrador') || $this->user->hasRole('Profesor')) {
             $emails = Email::where($this->searchColumn, 'like', '%' . $this->search . '%')
                 ->orderBy($this->sortField, $this->sortDirection)
                 ->paginate(10);
 
-            return view('livewire.admin.email.email-manager', compact('emails'));
+            return view('livewire.admin.email.email-manager', [
+                'emails' => $emails,
+                'user' => $this->user
+            ]);
         }
     }
 }

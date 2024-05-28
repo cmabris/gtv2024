@@ -28,6 +28,7 @@ class TeacherRequest extends Component
             EmailForAdmin::create([
                 'body' => $mailBody,
                 'from' => $sender,
+                'subject' => 'Petición cambio de rol a profesor',
             ]);
             return redirect()->route('welcome');
         } else {

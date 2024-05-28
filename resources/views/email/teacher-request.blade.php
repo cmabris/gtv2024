@@ -15,13 +15,14 @@
             <main class="p-20">
                 <div class="mt-4 p-4 max-w-lg text-center space-y-4 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto">
                     <h5 class="text-4xl font-bold whitespace-nowrap text-gray-800">GTV</h5>
-                    <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400 font-bold">Nuevo registro de usuario</p>
+                    <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400 font-bold">Peticion cambio de rol a profesor</p>
                     <div class="relative w-36 h-36 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 mx-auto">
                         <svg class="w-36 h-36 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
                     </div>
                     <div class="space-y-1">
                         <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400">Nombre: <span class="text-gray-500">{{ $user->name }}</span></p>
                         <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400">Email: <span class="text-gray-500">{{ $user->email }}</span></p>
+                        <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400">Email: <span class="text-gray-500">{{ $user->roles->first()->name }}</span></p>
                     </div>
 
                     <div>

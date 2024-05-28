@@ -53,7 +53,7 @@
             </div>
                 <x-jet-section-border />
 
-                @role('Student')
+                @role('Alumno')
 
                 <div class="mt-10 sm:mt-0">
                     @livewire('profile.teacher-request')
