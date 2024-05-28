@@ -287,4 +287,105 @@ class CreateUserTest extends TestCase
         $this->assertDatabaseCount('users', 1); // Solo el administrador
     }
 
+    /** @test */
+    public function can_create_user_without_avatar()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
+
+        Livewire::actingAs($adminUser)
+            ->test(CreateUser::class)
+            ->set('createForm.open', true)
+            ->set('createForm.name', 'John Doe')
+            ->set('createForm.email', 'john@example.com')
+            ->set('createForm.email_confirmation', 'john@example.com')
+            ->set('createForm.password', 'password')
+            ->set('createForm.password_confirmation', 'password')
+            ->set('createForm.role', $studentRole->id)
+            ->call('save');
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+        ]);
+    }
+
+    /** @test */
+    public function the_avatar_must_be_an_image()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
+
+        $invalidAvatar = UploadedFile::fake()->create('document.pdf', 100, 'application/pdf');
+
+        Livewire::actingAs($adminUser)
+            ->test(CreateUser::class)
+            ->set('createForm.open', true)
+            ->set('createForm.name', 'John Doe')
+            ->set('createForm.email', 'john@example.com')
+            ->set('createForm.email_confirmation', 'john@example.com')
+            ->set('createForm.password', 'password')
+            ->set('createForm.password_confirmation', 'password')
+            ->set('createForm.role', $studentRole->id)
+            ->set('createForm.avatar', $invalidAvatar)
+            ->call('save')
+            ->assertHasErrors(['createForm.avatar' => 'image']);
+
+        $this->assertDatabaseCount('users', 1); // Solo el administrador
+    }
+
+    /** @test */
+    public function the_avatar_must_not_exceed_maximum_size()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
+
+        $largeAvatar = UploadedFile::fake()->create('large-avatar.jpg')->size(2048); // 2MB file
+
+        Livewire::actingAs($adminUser)
+            ->test(CreateUser::class)
+            ->set('createForm.open', true)
+            ->set('createForm.name', 'John Doe')
+            ->set('createForm.email', 'john@example.com')
+            ->set('createForm.email_confirmation', 'john@example.com')
+            ->set('createForm.password', 'password')
+            ->set('createForm.password_confirmation', 'password')
+            ->set('createForm.role', $studentRole->id)
+            ->set('createForm.avatar', $largeAvatar)
+            ->call('save')
+            ->assertHasErrors(['createForm.avatar' => 'max']);
+
+        $this->assertDatabaseCount('users', 1); // Solo el administrador
+    }
+
+    /** @test */
+    public function can_create_user_with_valid_avatar()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
+
+        $validAvatar = UploadedFile::fake()->image('avatar.jpg', 100, 100)->size(512); // 512KB file
+
+        Livewire::actingAs($adminUser)
+            ->test(CreateUser::class)
+            ->set('createForm.open', true)
+            ->set('createForm.name', 'John Doe')
+            ->set('createForm.email', 'john@example.com')
+            ->set('createForm.email_confirmation', 'john@example.com')
+            ->set('createForm.password', 'password')
+            ->set('createForm.password_confirmation', 'password')
+            ->set('createForm.role', $studentRole->id)
+            ->set('createForm.avatar', $validAvatar)
+            ->call('save');
+
+        $this->assertDatabaseHas('users', [
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
+        ]);
+    }
+
 }
