@@ -20,31 +20,28 @@ class CreateUserTest extends TestCase
     /** @test */
     public function can_create_user()
     {
-
-        $user = User::factory()->create();
-        $role = Role::factory()->create();
-      
+        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
 
         Livewire::test(CreateUser::class)
-            ->set('createForm.name', $user->name)
-            ->set('createForm.email', $user->email)
-            ->set('createForm.password', $user->password)
-            ->set('createForm.role', $role->id)
+            ->set('createForm.open', true)
+            ->set('createForm.name', 'John Doe')
+            ->set('createForm.email', 'john@example.com')
+            ->set('createForm.email_confirmation', 'john@example.com')
+            ->set('createForm.password', 'password')
+            ->set('createForm.password_confirmation', 'password') // Agregar confirmación
+            ->set('createForm.role', $studentRole->id)
             ->call('save');
 
         $this->assertDatabaseHas('users', [
-            'name' => $user->name,
-            'email' => $user->email,
+            'name' => 'John Doe',
+            'email' => 'john@example.com',
         ]);
-
-
-      
     }
     /** @test */
     public function TestUserNameIsRequired()
     {
-     
-        
+
+
         Livewire::test(CreateUser::class)
         ->set('createForm.open', true)
         ->set('createForm.email', 'john@mail.com')
@@ -60,34 +57,34 @@ class CreateUserTest extends TestCase
       /** @test */
       public function TestEmailIsRequired()
       {
-       
-          
+
+
           Livewire::test(CreateUser::class)
           ->set('createForm.open', true)
           ->set('createForm.name', 'john')
           ->set('createForm.password', 'password')
           ->set('createForm.role', 1)
           ->call('save')
-  
+
               ->assertHasErrors(['createForm.email' => 'required']);
-  
+
           $this->assertDatabaseCount('users', 0);
       }
 
          /** @test */
          public function TestPasswordIsRequired()
          {
-          
-             
+
+
              Livewire::test(CreateUser::class)
              ->set('createForm.open', true)
              ->set('createForm.name', 'john')
              ->set('createForm.email', 'john@mail.com')
              ->set('createForm.role', 1)
              ->call('save')
-     
+
                  ->assertHasErrors(['createForm.password' => 'required']);
-     
+
              $this->assertDatabaseCount('users', 0);
          }
 
@@ -95,25 +92,25 @@ class CreateUserTest extends TestCase
          /** @test */
          public function TestRoleIsRequired()
          {
-          
-             
+
+
              Livewire::test(CreateUser::class)
              ->set('createForm.open', true)
              ->set('createForm.name', 'john')
              ->set('createForm.email', 'john@mail.com')
              ->set('createForm.password', 'password')
              ->call('save')
-     
+
                  ->assertHasErrors(['createForm.role' => 'required']);
-     
+
              $this->assertDatabaseCount('users', 0);
          }
 
            /** @test */
          public function TestEmailIsACorrectForm()
          {
-          
-             
+
+
              Livewire::test(CreateUser::class)
              ->set('createForm.open', true)
              ->set('createForm.name', 'john')
@@ -121,9 +118,9 @@ class CreateUserTest extends TestCase
              ->set('createForm.password', 'password')
              ->set('createForm.role', '1')
              ->call('save')
-     
+
                  ->assertHasErrors(['createForm.email']);
-     
+
              $this->assertDatabaseCount('users', 0);
          }
 
@@ -131,8 +128,8 @@ class CreateUserTest extends TestCase
            /** @test */
            public function TestPasswordNotReachTheLimitCharacter()
            {
-            
-               
+
+
                Livewire::test(CreateUser::class)
                ->set('createForm.open', true)
                ->set('createForm.name', 'john')
@@ -140,9 +137,9 @@ class CreateUserTest extends TestCase
                ->set('createForm.password', 'pass')
                ->set('createForm.role', '1')
                ->call('save')
-       
+
                    ->assertHasErrors(['createForm.password']);
-       
+
                $this->assertDatabaseCount('users', 0);
            }
 
@@ -150,8 +147,8 @@ class CreateUserTest extends TestCase
             /** @test */
             public function TestTheIdRoleDoesNotExist()
             {
-             
-                
+
+
                 Livewire::test(CreateUser::class)
                 ->set('createForm.open', true)
                 ->set('createForm.name', 'john')
@@ -159,16 +156,12 @@ class CreateUserTest extends TestCase
                 ->set('createForm.password', 'pass')
                 ->set('createForm.role', '5')
                 ->call('save')
-        
+
                     ->assertHasErrors(['createForm.role']);
-        
+
                 $this->assertDatabaseCount('users', 0);
             }
-   
-  
 
 
-   
 
-   
 }
