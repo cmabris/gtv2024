@@ -240,6 +240,29 @@ class CreateUserTest extends TestCase
 
         $this->assertDatabaseCount('users', 1); // Solo el administrador
     }
+    /** @test */
+    public function name_must_not_exceed_maximum_length_creating_a_user()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
+
+        $longName = str_repeat('a', 101); // Contraseña de más de 500 caracteres
+
+        Livewire::actingAs($adminUser)
+            ->test(CreateUser::class)
+            ->set('createForm.open', true)
+            ->set('createForm.name', $longName)
+            ->set('createForm.email', 'john@mail.com')
+            ->set('createForm.email_confirmation', 'john@mail.com')
+            ->set('createForm.password', 'password')
+            ->set('createForm.password_confirmation', 'password')
+            ->set('createForm.role', $studentRole->id)
+            ->call('save')
+            ->assertHasErrors(['createForm.name' => 'max']);
+
+        $this->assertDatabaseCount('users', 1); // Solo el administrador
+    }
 
     /** @test */
     public function the_role_must_exist_creating_a_user()
@@ -386,6 +409,52 @@ class CreateUserTest extends TestCase
             'name' => 'John Doe',
             'email' => 'john@example.com',
         ]);
+    }
+
+    /** @test */
+    public function test_email_must_be_confirmed_creating_a_user()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
+
+
+        Livewire::actingAs($adminUser)
+            ->test(CreateUser::class)
+            ->set('createForm.open', true)
+            ->set('createForm.name', 'John Doe')
+            ->set('createForm.email', 'test@example.com')
+            ->set('createForm.email_confirmation', 'different@example.com')
+            ->set('createForm.password', 'password')
+            ->set('createForm.password_confirmation', 'password')
+            ->set('createForm.role', $studentRole->id)
+            ->call('save')
+            ->assertHasErrors(['createForm.email' => 'confirmed']);
+
+        $this->assertDatabaseCount('users', 1);
+    }
+
+    /** @test */
+    public function test_password_must_be_confirmed_creating_a_user()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
+
+
+        Livewire::actingAs($adminUser)
+            ->test(CreateUser::class)
+            ->set('createForm.open', true)
+            ->set('createForm.name', 'John Doe')
+            ->set('createForm.email', 'test@example.com')
+            ->set('createForm.email_confirmation', 'test@example.com')
+            ->set('createForm.password', 'password')
+            ->set('createForm.password_confirmation', 'differentPassword')
+            ->set('createForm.role', $studentRole->id)
+            ->call('save')
+            ->assertHasErrors(['createForm.password' => 'confirmed']);
+
+        $this->assertDatabaseCount('users', 1);
     }
 
 }
