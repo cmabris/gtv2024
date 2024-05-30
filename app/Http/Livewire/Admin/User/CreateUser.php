@@ -29,7 +29,7 @@ class CreateUser extends Component
 
     protected $rules = [
         'createForm.avatar' => 'nullable|image|max:1024',
-        'createForm.name' => 'required|string',
+        'createForm.name' => 'required|string|max:100',
         'createForm.email' => 'required|confirmed|string|max:45|unique:users,email',
         'createForm.password' => 'required|confirmed|string|min:8|max:500',
         'createForm.role' => 'required|exists:roles,id',
