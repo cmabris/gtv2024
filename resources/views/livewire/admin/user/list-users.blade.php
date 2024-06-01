@@ -19,7 +19,7 @@
                 <option value="id">ID</option>
                 <option value="name">NOMBRE</option>
                 <option value="created_at">FECHA DE CREACIÓN</option>
-                <option value="updated_at">FECHA DE CREACIÓN</option>
+                <option value="updated_at">FECHA DE ACTUALIZACIÓN</option>
             </select>
         </div>
 

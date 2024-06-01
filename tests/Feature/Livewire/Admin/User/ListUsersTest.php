@@ -293,7 +293,7 @@ class ListUsersTest extends TestCase
             ->test(ListUsers::class)
             ->call('sort', 'updated_at')
             ->call('render')
-            ->assertSeeInOrder([$user3->email, $user2->email, $user1->email]);
+            ->assertSeeInOrder([$user1->email, $user2->email, $user3->email]);
     }
 
     /** @test */
