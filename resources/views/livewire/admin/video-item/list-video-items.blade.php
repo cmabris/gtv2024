@@ -10,7 +10,7 @@
                 <option value="video_id">ID VIDEO</option>
                 <option value="quality">CALIDAD</option>
                 <option value="format">FORMATO</option>
-                <option value="orientation">HORIENTACIÓN</option>
+                <option value="orientation">ORIENTACIÓN</option>
                 <option value="created_at">FECHA DE CREACIÓN</option>
             </select>
         </div>

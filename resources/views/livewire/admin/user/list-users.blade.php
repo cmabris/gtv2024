@@ -138,10 +138,6 @@
                 {{ $users->links() }}
             </div>
         @endif
-    @else
-        <p class="mt-4">No se han encontrado resultados</p>
-    @endif
-
     {{-- Modal show --}}
     <x-jet-dialog-modal wire:model="detailsModal.open">
         <x-slot name="title">
@@ -193,6 +189,9 @@
             </x-button>
         </x-slot>
     </x-jet-dialog-modal>
+    @else
+        <p class="mt-4">No se han encontrado resultados</p>
+    @endif
 
     @push('scripts')
         <script>
