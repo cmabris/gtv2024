@@ -3,10 +3,13 @@
 namespace App\Http\Livewire\Admin\User;
 
 use App\Models\User;
+use App\Models\EmailForAdmin; // Importar el modelo correspondiente
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
+use App\Mail\UserPromotedToTeacher;
 
 class EditUser extends Component
 {
@@ -73,11 +76,22 @@ class EditUser extends Component
             'password'=> \bcrypt($this->editForm['password']),
         ]);
 
-        $role = Role::findById($this->editForm['role']);
-        $user->syncRoles($role);
+        $newRole = Role::findById($this->editForm['role']);
+        $currentRole = $user->roles->first();
+
+        $user->syncRoles($newRole);
 
         if ($isUpdated) {
             Log::info('User with ID ' . auth()->user()->id . ' edited the following user ' . $user);
+
+            if ($newRole->name === 'Profesor' && (!$currentRole || $currentRole->name !== 'Profesor') && $user->requested_teacher_role) {
+                Mail::to($user->email)->send(new UserPromotedToTeacher($user));
+
+                $user->requested_teacher_role = false;
+                $user->save();
+
+                EmailForAdmin::where('user_id', $user->id)->delete();
+            }
         }
 
         $this->editForm['open'] = false;

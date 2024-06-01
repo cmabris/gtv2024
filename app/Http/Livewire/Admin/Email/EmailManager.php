@@ -2,9 +2,12 @@
 
 namespace App\Http\Livewire\Admin\Email;
 
+use App\Mail\ProposalRejected;
 use App\Models\EmailForAdmin as Email;
+use App\Models\User;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -105,7 +108,17 @@ class EmailManager extends Component
 
     public function delete(Email $email)
     {
+
+        $user = User::where('email', $email->from)->first();
+
         $email->delete();
+
+        if ($user) {
+            $user->requested_teacher_role = false;
+            $user->save();
+
+            Mail::to($user->email)->send(new ProposalRejected($user));
+        }
 
         Log::info('Email with ID ' . $email->id . ' was deleted');
     }

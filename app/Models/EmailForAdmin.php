@@ -12,4 +12,9 @@ class EmailForAdmin extends Model
     protected $table = 'email_for_admin';
 
     protected $guarded = ['id'];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
