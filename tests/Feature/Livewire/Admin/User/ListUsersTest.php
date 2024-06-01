@@ -487,5 +487,260 @@ class ListUsersTest extends TestCase
             ->call('render')
             ->assertSeeInOrder([$user2->name, $user1->name]);
     }
+    //FILTROS COMPUESTOS
+    /** @test */
+    public function it_searches_users_by_name_and_sorts_by_email_asc()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = Role::create(['name' => 'Alumno']);
+
+        $user1 = User::factory()->create([
+            'name' => 'Paco',
+            'email' => 'paco@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user1->assignRole($studentRole);
+
+        $user2 = User::factory()->create([
+            'name' => 'Pablo',
+            'email' => 'pablo@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user2->assignRole($studentRole);
+
+        $user3 = User::factory()->create([
+            'name' => 'Student',
+            'email' => 'student@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user3->assignRole($studentRole);
+
+        $this->assertDatabaseCount('users', 4);
+
+        Livewire::actingAs($adminUser)
+            ->test(ListUsers::class)
+            ->set('searchColumn', 'name')
+            ->set('search', 'Pa')
+            ->call('sort', 'email')
+            ->call('render')
+            ->assertSeeInOrder([$user2->email, $user1->email])
+            ->assertDontSee($user3->name);
+    }
+
+    /** @test */
+    public function it_searches_users_by_name_and_sorts_by_email_desc()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = Role::create(['name' => 'Alumno']);
+
+        $user1 = User::factory()->create([
+            'name' => 'Paco',
+            'email' => 'paco1@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user1->assignRole($studentRole);
+
+        $user2 = User::factory()->create([
+            'name' => 'Paco',
+            'email' => 'paco2@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user2->assignRole($studentRole);
+
+        $user3 = User::factory()->create([
+            'name' => 'Student',
+            'email' => 'student@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user3->assignRole($studentRole);
+
+        $this->assertDatabaseCount('users', 4);
+
+        Livewire::actingAs($adminUser)
+            ->test(ListUsers::class)
+            ->set('searchColumn', 'name')
+            ->set('search', 'Paco')
+            ->call('sort', 'email')
+            ->call('sort', 'email')
+            ->call('render')
+            ->assertSeeInOrder([$user2->email, $user1->email])
+            ->assertDontSee($user3->name);
+    }
+
+    /** @test */
+    public function it_searches_users_by_created_at_and_sorts_by_name_asc()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = Role::create(['name' => 'Alumno']);
+
+        $user1 = User::factory()->create([
+            'created_at' => now()->subDays(1),
+            'name' => 'Alice',
+            'email' => 'alice@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user1->assignRole($studentRole);
+
+        $user2 = User::factory()->create([
+            'created_at' => now(),
+            'name' => 'Bob',
+            'email' => 'bob@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user2->assignRole($studentRole);
+
+        $user3 = User::factory()->create([
+            'created_at' => now()->subDays(1),
+            'name' => 'Charlie',
+            'email' => 'charlie@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user3->assignRole($studentRole);
+
+        $this->assertDatabaseCount('users', 4);
+
+        Livewire::actingAs($adminUser)
+            ->test(ListUsers::class)
+            ->set('searchColumn', 'created_at')
+            ->set('search', now()->subDays(1)->toDateString())
+            ->call('sort', 'name')
+            ->call('render')
+            ->assertSeeInOrder([$user1->name, $user3->name])
+            ->assertDontSee($user2->name);
+    }
+
+    /** @test */
+    public function it_searches_users_by_created_at_and_sorts_by_name_desc()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = Role::create(['name' => 'Alumno']);
+
+        $user1 = User::factory()->create([
+            'created_at' => now()->subDays(1),
+            'name' => 'Alice',
+            'email' => 'alice@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user1->assignRole($studentRole);
+
+        $user2 = User::factory()->create([
+            'created_at' => now(),
+            'name' => 'Bob',
+            'email' => 'bob@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user2->assignRole($studentRole);
+
+        $user3 = User::factory()->create([
+            'created_at' => now()->subDays(1),
+            'name' => 'Charlie',
+            'email' => 'charlie@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user3->assignRole($studentRole);
+
+        $this->assertDatabaseCount('users', 4);
+
+        Livewire::actingAs($adminUser)
+            ->test(ListUsers::class)
+            ->set('searchColumn', 'created_at')
+            ->set('search', now()->subDays(1)->toDateString())
+            ->call('sort', 'name')
+            ->call('sort', 'name')
+            ->call('render')
+            ->assertSeeInOrder([$user3->name, $user1->name])
+            ->assertDontSee($user2->name);
+    }
+
+    /** @test */
+    public function it_searches_users_by_updated_at_and_sorts_by_email_asc()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = Role::create(['name' => 'Alumno']);
+
+        $user1 = User::factory()->create([
+            'updated_at' => now()->subDays(1),
+            'name' => 'Student One',
+            'email' => 'one@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user1->assignRole($studentRole);
+
+        $user2 = User::factory()->create([
+            'updated_at' => now(),
+            'name' => 'Student Two',
+            'email' => 'two@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user2->assignRole($studentRole);
+
+        $user3 = User::factory()->create([
+            'updated_at' => now()->subDays(1),
+            'name' => 'Student Three',
+            'email' => 'three@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user3->assignRole($studentRole);
+
+        $this->assertDatabaseCount('users', 4);
+
+        Livewire::actingAs($adminUser)
+            ->test(ListUsers::class)
+            ->set('searchColumn', 'updated_at')
+            ->set('search', now()->subDays(1)->toDateString())
+            ->call('sort', 'email')
+            ->call('render')
+            ->assertSeeInOrder([$user1->email, $user3->email])
+            ->assertDontSee($user2->name);
+    }
+
+    /** @test */
+    public function it_searches_users_by_updated_at_and_sorts_by_email_desc()
+    {
+        $adminUser = $this->createAdmin();
+
+        $studentRole = Role::create(['name' => 'Alumno']);
+
+        $user1 = User::factory()->create([
+            'updated_at' => now()->subDays(1),
+            'name' => 'Student One',
+            'email' => 'one@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user1->assignRole($studentRole);
+
+        $user2 = User::factory()->create([
+            'updated_at' => now(),
+            'name' => 'Student Two',
+            'email' => 'two@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user2->assignRole($studentRole);
+
+        $user3 = User::factory()->create([
+            'updated_at' => now()->subDays(1),
+            'name' => 'Student Three',
+            'email' => 'three@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $user3->assignRole($studentRole);
+
+        $this->assertDatabaseCount('users', 4);
+
+        Livewire::actingAs($adminUser)
+            ->test(ListUsers::class)
+            ->set('searchColumn', 'updated_at')
+            ->set('search', now()->subDays(1)->toDateString())
+            ->call('sort', 'email')
+            ->call('sort', 'email') 
+            ->call('render')
+            ->assertSeeInOrder([$user3->email, $user1->email])
+            ->assertDontSee($user2->name);
+    }
 
 }
