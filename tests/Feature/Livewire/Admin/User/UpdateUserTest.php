@@ -30,24 +30,20 @@ class UpdateUserTest extends TestCase
             ->call('openEditModal', $user)
             ->assertSet('editForm.name', $user->name)
             ->assertSet('editForm.email', $user->email)
-            ->assertSet('editForm.email_confirmation', $user->email)
-            ->assertSet('editForm.password', $user->password)
-            ->assertSet('editForm.role', $user->roles->first()->id);
+            ->assertSet('editForm.role', $user->roles->first()->id)
+            ->set('editForm.name', 'Nuevo Nombre')
+            ->set('editForm.email', 'nuevo@ejemplo.com')
+            ->set('editForm.email_confirmation', 'nuevo@ejemplo.com')
+            ->set('editForm.password', 'nuevacontraseña')
+            ->set('editForm.password_confirmation', 'nuevacontraseña')
+            ->call('update', $user);
 
-        // Simular la actualización del usuario
-        $userToUpdate = User::find($user->id);
-        $userToUpdate->name = 'Nuevo Nombre';
-        $userToUpdate->email = 'nuevo@ejemplo.com';
-        $userToUpdate->password = bcrypt('nuevacontraseña');
-        $userToUpdate->save();
+        $user->refresh();
 
-        $userToUpdate->refresh();
-
-        $this->assertEquals('Nuevo Nombre', $userToUpdate->name);
-        $this->assertEquals('nuevo@ejemplo.com', $userToUpdate->email);
-        $this->assertTrue(Hash::check('nuevacontraseña', $userToUpdate->password));
+        $this->assertEquals('Nuevo Nombre', $user->name);
+        $this->assertEquals('nuevo@ejemplo.com', $user->email);
+        $this->assertTrue(Hash::check('nuevacontraseña', $user->password));
     }
-
 //EMAIL
     /** @test */
     public function test_email_is_required()
