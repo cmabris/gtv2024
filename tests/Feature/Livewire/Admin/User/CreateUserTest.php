@@ -41,7 +41,6 @@ class CreateUserTest extends TestCase
     public function TestUserNameIsRequired()
     {
 
-
         Livewire::test(CreateUser::class)
         ->set('createForm.open', true)
         ->set('createForm.email', 'john@mail.com')
@@ -167,15 +166,8 @@ class CreateUserTest extends TestCase
     public function the_email_must_be_unique_creating_a_user()
     {
         $adminUser = $this->createAdmin();
-
-        $existingUser = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $existingUser->assignRole($studentRole);
+        $existingUser = $this->createStudent();
+        $role = Role::first();
 
         Livewire::actingAs($adminUser)
             ->test(CreateUser::class)
@@ -185,11 +177,11 @@ class CreateUserTest extends TestCase
             ->set('createForm.email_confirmation', $existingUser->email)
             ->set('createForm.password', 'password')
             ->set('createForm.password_confirmation', 'password')
-            ->set('createForm.role', $studentRole->id)
+            ->set('createForm.role', $role->id)
             ->call('save')
             ->assertHasErrors(['createForm.email' => 'unique']);
 
-        $this->assertDatabaseCount('users', 2);//el $adminUser y $existingUser
+        $this->assertDatabaseCount('users', 2);
     }
 
 

@@ -14,15 +14,7 @@ class UpdateUserTest extends TestCase
     public function it_can_update_a_user()
     {
         $adminUser = $this->createAdmin();
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => bcrypt('password'), // Cifra la contraseña utilizando bcrypt
-        ]);
-
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         $this->actingAs($adminUser);
 
@@ -49,15 +41,7 @@ class UpdateUserTest extends TestCase
     public function test_email_is_required()
     {
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
@@ -70,15 +54,7 @@ class UpdateUserTest extends TestCase
     public function test_email_must_be_confirmed()
     {
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
@@ -92,15 +68,7 @@ class UpdateUserTest extends TestCase
     public function test_email_must_be_a_valid_email()
     {
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
@@ -114,15 +82,7 @@ class UpdateUserTest extends TestCase
     public function test_email_max_length()
     {
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
@@ -134,32 +94,15 @@ class UpdateUserTest extends TestCase
     /** @test */
     public function test_email_must_be_unique()
     {
-        $existingUser = User::create([
-            'name' => 'ExistingUser',
-            'email' => 'existing@example.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igifasdfsaf', // password
-        ]);
-        $studentRole1 = \Spatie\Permission\Models\Role::create(['name' => 'Alumno1']);
-        $existingUser->assignRole($studentRole1);
-
-
+        $existingUser = $this->createStudent();
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole2 = \Spatie\Permission\Models\Role::create(['name' => 'Alumno2']);
-        $user->assignRole($studentRole2);
-
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
             ->call('openEditModal', $user)
-            ->set('editForm.email', 'existing@example.com')
-            ->set('editForm.email_confirmation', 'existing@example.com')
+            ->set('editForm.email', $existingUser->email)
+            ->set('editForm.email_confirmation', $existingUser->email)
             ->call('update', $user)
             ->assertHasErrors(['editForm.email' => 'unique']);
     }
@@ -169,15 +112,7 @@ class UpdateUserTest extends TestCase
     public function password_is_required()
     {
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
@@ -190,15 +125,7 @@ class UpdateUserTest extends TestCase
     public function password_must_be_confirmed()
     {
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
@@ -212,15 +139,7 @@ class UpdateUserTest extends TestCase
     public function password_length_must_be_at_least_8_characters()
     {
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
@@ -233,15 +152,7 @@ class UpdateUserTest extends TestCase
     public function password_length_must_not_exceed_500_characters()
     {
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
@@ -256,15 +167,7 @@ class UpdateUserTest extends TestCase
     public function name_is_required()
     {
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
@@ -279,15 +182,7 @@ class UpdateUserTest extends TestCase
     public function role_is_required()
     {
         $adminUser = $this->createAdmin();
-
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
+        $user = $this->createStudent();
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
@@ -300,17 +195,9 @@ class UpdateUserTest extends TestCase
     public function role_must_exist_in_roles_table()
     {
         $adminUser = $this->createAdmin();
+        $user = $this->createStudent();
 
-        $user = User::create([
-            'name' => 'Student',
-            'email' => 'student@mail.com',
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        ]);
-
-        $studentRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
-        $user->assignRole($studentRole);
-
-        $nonExistingRoleId = 9999; // ID que no existe en la tabla roles
+        $nonExistingRoleId = 9999;
 
         Livewire::actingAs($adminUser)
             ->test(EditUser::class)
