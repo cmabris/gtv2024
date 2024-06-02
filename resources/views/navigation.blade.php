@@ -89,10 +89,8 @@
                 @endauth
             </div>
             @role('Administrador')
-            <div class="ml-8">
-                <a href="{{ route('admin.emails') }}"> <!-- Reemplaza 'tu_ruta' con la ruta deseada -->
-                    <img width="35" height="35" src="https://img.icons8.com/material-outlined/24/inbox.png" alt="inbox"/>
-                </a>
+            <div>    
+            @livewire('admin.unread-email-counter')
             </div>
             @endrole
 
