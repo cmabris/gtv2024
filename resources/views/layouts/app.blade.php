@@ -16,7 +16,7 @@
     @livewireStyles
 
         <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script> 
+        <script src="{{ mix('js/app.js') }}" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.0.6" defer></script>
     </head>
     <body class="font-sans antialiased">
