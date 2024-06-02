@@ -144,20 +144,18 @@
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="flex items-center px-4">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                    <div class="shrink-0 mr-3">
-                        <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
-                    </div>
+                    <img class="h-10 w-10 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
                 @endif
 
-                <div>
+                <div class="sm:w-1/2 mt-3 sm:mt-0 flex flex-col items-center sm:items-start">
                     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
             </div>
 
-            <div class="mt-3 space-y-1">
+            <div class="mt-4 space-y-4">
                 <!-- Account Management -->
                 <x-jet-responsive-nav-link href="{{ route('profile.show') }}" :active="request()->routeIs('profile.show')">
                     {{ __('Profile') }}
@@ -168,6 +166,9 @@
                         {{ __('API Tokens') }}
                     </x-jet-responsive-nav-link>
                 @endif
+            </div>
+        </div>
+    </div>
 
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}" x-data>
