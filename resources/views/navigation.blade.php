@@ -82,7 +82,13 @@
                     </x-slot>
                 </x-jet-dropdown>
             @endauth
+            @role('Administrador')
+                <div class="space-x-4">    
+                @livewire('admin.unread-email-counter')
+                </div>
+            @endrole
         </div>
+       
     </div>
 </nav>
 
