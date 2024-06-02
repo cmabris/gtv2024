@@ -30,10 +30,10 @@
     </main>
 </div>
 
-@stack('modals')
+        @stack('modals')
 
-@livewireScripts
+        @livewireScripts
 
-@stack('scripts')
-</body>
+        @stack('scripts')
+    </body>
 </html>
