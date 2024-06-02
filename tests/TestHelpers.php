@@ -76,4 +76,33 @@ trait TestHelpers
     {
         return \factory(Photography::class)->create();
     }
+
+    public function createStudent(array $attributes = [])
+    {
+        $studentRole = Role::firstOrCreate(['name' => 'Alumno']);
+
+        $defaultAttributes = [
+            'name' => 'Student',
+            'email' => 'student' . uniqid() . '@mail.com',
+            'password' => bcrypt('password'),
+        ];
+
+        $userAttributes = array_merge($defaultAttributes, $attributes);
+
+        $user = User::factory()->create($userAttributes);
+        $user->assignRole($studentRole);
+        return $user;
+    }
+
+    public function createExistingUser()
+    {
+        $existingUser = User::factory()->create([
+            'name' => 'ExistingUser',
+            'email' => 'existing@example.com',
+            'password' => bcrypt('password'),
+        ]);
+        $existingRole = \Spatie\Permission\Models\Role::create(['name' => 'Alumno']);
+        $existingUser->assignRole($existingRole);
+        return $existingUser;
+    }
 }
