@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
+use App\Mail\UserRegister;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -36,6 +39,10 @@ class CreateNewUser implements CreatesNewUsers
 
         // Asignar el rol de "student" al usuario
         $user->syncRoles(['GTVisor']);
+
+        //generamos un correo de bienvenida para el usuario
+
+        Mail::to($user->email)->send(new UserRegister($user));
 
         return $user;
     }

@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return 'password';
     }
+
+    public function emailForAdmins()
+    {
+        return $this->hasMany(EmailForAdmin::class);
+    }
 }

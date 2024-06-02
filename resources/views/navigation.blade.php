@@ -75,13 +75,20 @@
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 
-                            <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-jet-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-jet-dropdown>
-            @endauth
+                                <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-jet-dropdown-link>
+                            </form>
+                        </x-slot>
+                    </x-jet-dropdown>
+                @endauth
+            </div>
+            @role('Administrador')
+            <div>    
+            @livewire('admin.unread-email-counter')
+            </div>
+            @endrole
+
         </div>
     </div>
 </nav>

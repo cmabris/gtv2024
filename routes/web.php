@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Livewire\Admin\Map\Map;
 use App\Http\Livewire\Admin\Point\ShowPoint;
 use App\Http\Livewire\Admin\Photography\Photographies;
 use App\Http\Livewire\Admin\Places\ListPlaces;
@@ -9,6 +8,7 @@ use App\Http\Livewire\Admin\User\ListUsers;
 use App\Http\Livewire\Admin\Video\ListVideos;
 use App\Http\Livewire\Admin\VideoItem\ListVideoItems;
 use App\Http\Livewire\Admin\Visit\ShowVisits;
+use App\Http\Livewire\Admin\Email\EmailManager;
 use App\Http\Livewire\Welcome;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +29,9 @@ Route::group(['middleware' => 'admin_or_teacher_or_student'], function () {
     Route::get('photographies', Photographies::class)->name('photographies.index');
 });
 
+Route::get('admin-emails', EmailManager::class)->name('admin.emails');
+ /*   Route::get('email-cositas', function (){
+
+        return view('email.user-created');
+    } )->name('email-cositas');*/
 Route::get('/', Welcome::class)->name('welcome');
