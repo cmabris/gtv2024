@@ -2,12 +2,11 @@
 
 namespace App\Mail;
 
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class UserCreated extends Mailable
+class TeacherRequest extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -22,6 +21,6 @@ class UserCreated extends Mailable
     {
         $user = $this->user;
 
-        return $this->subject('Usuario registrado')->view('email.user-created', compact('user'));
+        return $this->subject('User Request')->view('email.teacher-request', compact('user'));
     }
 }

@@ -45,12 +45,23 @@
 
             <div class="mt-10 sm:mt-0">
                 @if(auth()->user()->hasRole('GTVisor') && (auth()->user()->toArray()['previous_role'] == null))
-                @elseif(auth()->user()->hasRole('GTVisor') )
+                @elseif(auth()->user()->hasRole('GTVisor'))
                     @livewire('profile.revert-gtvisor-user')
                 @else
                     @livewire('profile.create-gtvisor-user')
                 @endif
             </div>
+                <x-jet-section-border />
+
+                @role('Alumno')
+
+                <div class="mt-10 sm:mt-0">
+                    @livewire('profile.teacher-request')
+                </div>
+
+                @endrole
+
+
         </div>
     </div>
 </x-app-layout>
