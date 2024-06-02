@@ -26,7 +26,7 @@
             @include('navigation')
 
             <!-- Page Content -->
-            <main class="container mx-auto px-20 py-16">
+            <main class="container mx-auto px-20 py-16"> 
                 {{ $slot }}
             </main>
         </div>
