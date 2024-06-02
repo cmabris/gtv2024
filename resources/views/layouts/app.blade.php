@@ -1,39 +1,39 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
 
-        <!-- Fonts -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-        @livewireStyles
+    @livewireStyles
 
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
-    </head>
-    <body class="font-sans antialiased">
-        <x-jet-banner />
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js') }}" defer></script>
+</head>
+<body class="font-sans antialiased">
+<x-jet-banner />
 
-        <div class="min-h-screen bg-gray-200">
-            @include('navigation')
+<div class="min-h-screen bg-gray-200">
+    @include('navigation')
 
-            <!-- Page Content -->
-            <main class="container mx-auto px-2 md:px-20 py-16">
-                {{ $slot }}
-            </main>
-        </div>
+    <!-- Page Content -->
+    <main class="container mx-auto px-2 md:px-20 py-16">
+        {{ $slot }}
+    </main>
+</div>
 
-        @stack('modals')
+@stack('modals')
 
-        @livewireScripts
+@livewireScripts
 
-        @stack('scripts')
-    </body>
+@stack('scripts')
+</body>
 </html>
