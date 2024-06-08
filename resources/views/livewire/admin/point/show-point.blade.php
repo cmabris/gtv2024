@@ -118,7 +118,7 @@
                 @foreach($points as $point)
                     <tr class="border-b dark:bg-gray-800 dark:border-gray-700 odd:bg-white even:bg-gray-50 odd:dark:bg-gray-800 even:dark:bg-gray-700">
                         <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                            {!!QrCode::size(100)->generate(json_encode($point, JSON_PRETTY_PRINT)) !!}
+                            {!!QrCode::size(100)->generate("https://www.google.com/maps?q={$point->latitude},{$point->longitude}") !!}
                         </td>
                         <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                             {{$point->id}}
@@ -157,6 +157,11 @@
                             <span class="font-medium text-red-500 cursor-pointer"
                                   wire:click="$emit('deletePoint', '{{$point->id}}')">
                                 <i class="fa-solid fa-trash"></i>
+                            </span>
+                            <span class="font-medium text-blue-500 cursor-pointer">
+                                <a href="https://www.google.com/maps?q={{$point->latitude}},{{$point->longitude}}">
+                                    <i class="fas fa-globe"></i>
+                                </a>
                             </span>
                         </td>
                     </tr>
