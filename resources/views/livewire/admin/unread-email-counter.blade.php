@@ -16,9 +16,8 @@
                 @forelse($emails as $email)
                     <li class="flex p-2 border-b border-gray-200">
                         <article class="flex-1">
-                            <h1 class="font-bold">{{ $email->subject }}</h1>
+                            <h1 class="font-bold">{{ $email->from }}</h1>
                             <p class="">{{ $email->created_at->format('d-m-Y H:i') }}</p>
-                            <p class="text-gray-600">{{ Str::limit($email->body, 50) }}</p>
                         </article>
                     </li>
                 @empty

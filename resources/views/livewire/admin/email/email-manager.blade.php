@@ -58,7 +58,7 @@
                                 <span class="font-medium text-blue-600 cursor-pointer" wire:click="show('{{ $email->id }}')">
                                     <i class="fa-solid fa-eye"></i>
                                 </span>
-                                <span class="font-medium text-red-600 cursor-pointer" wire:click="delete('{{ $email->id }}')">
+                                <span class="font-medium text-red-600 cursor-pointer" wire:click="confirmDelete('{{ $email->id }}')">
                                     <i class="fa-solid fa-trash"></i>
                                 </span>
                             </td>
@@ -78,7 +78,7 @@
             </div>
         @endif
 
-        <!-- Modal -->
+        <!-- Email Detail Modal -->
         @if($showModal)
             <div x-data="{ showModal: @entangle('showModal') }">
                 <div class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 transition-opacity ease-out duration-300" x-show="showModal">
@@ -107,14 +107,38 @@
                                     </div>
 
                                     <div>
-                                        <a href="{{ route('users.index') }}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                                            Ir a usuarios
-                                        </a>
                                         <button wire:click="closeModal" class="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Cerrar</button>
                                     </div>
                                 </div>
                             </main>
                         </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        <!-- Delete Confirmation Modal -->
+        @if($showDeleteModal)
+            <div x-data="{ showDeleteModal: @entangle('showDeleteModal') }">
+                <div class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50 transition-opacity ease-out duration-300" x-show="showDeleteModal">
+                    <div class="bg-white p-6 rounded shadow-lg transform transition-all ease-in-out duration-300"
+                        x-show="showDeleteModal"
+                        x-transition:enter="transition ease-out duration-300"
+                        x-transition:enter-start="opacity-0 scale-90"
+                        x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-200"
+                        x-transition:leave-start="opacity-100 scale-100"
+                        x-transition:leave-end="opacity-0 scale-90">
+
+                        <div>
+                            <p class="text-lg font-semibold text-gray-700">¿Estás seguro de que quieres eliminar esta petición?</p>
+                            <p class="text-sm text-gray-500 mt-2">Eliminarás todas las peticiones del mismo tipo asociadas a este usuario.</p>
+                            <div class="flex justify-end mt-4">
+                                <x-jet-button wire:click="performDelete" class="mr-2">Sí, eliminar</x-jet-button>
+                                <x-jet-secondary-button wire:click="$set('showDeleteModal', false)">Cancelar</x-jet-secondary-button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
