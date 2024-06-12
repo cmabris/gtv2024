@@ -22,7 +22,7 @@ class UserPromotedToTeacher extends Mailable
     public function build()
     {
         return $this->view('email.user-promoted-to-teacher')
-                    ->subject('Congratulations, you are now a Teacher!')
+                    ->subject('Enhorabuena, ahora eres profesor!')
                     ->with([
                         'user' => $this->user,
                     ]);

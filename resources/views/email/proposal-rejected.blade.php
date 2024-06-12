@@ -14,12 +14,12 @@
             <main class="p-20">
                 <div class="mt-4 p-4 max-w-lg text-center space-y-4 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto">
                     <h5 class="text-4xl font-bold whitespace-nowrap text-gray-800">GTV</h5>
-                    <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400 font-bold">Rejected Proposal</p>
+                    <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400 font-bold">Propuesta Rechazada</p>
                     <div class="space-y-1">
-                    <h1 class="text-2xl font-bold text-gray-800 mb-4">Hello, {{ $userName }}</h1>
-                    <p class="text-gray-600 mb-4">We regret to inform you that your proposal has been rejected.</p>
-                    <p class="text-gray-600 mb-4">If you have any questions, please do not hesitate to contact us.</p>
-                    <p class="text-gray-600">Greetings,<br>The management team</p>
+                    <h1 class="text-2xl font-bold text-gray-800 mb-4">Hola, {{ $userName }}</h1>
+                    <p class="text-gray-600 mb-4">Lamentamos informarte que tu propuesta ha sido rechazada.</p>
+                    <p class="text-gray-600 mb-4">Si tienes alguna pregunta, no dudes en contactarnos.</p>
+                    <p class="text-gray-600">Saludos,<br>El equipo de administracion</p>
                 </div>
                 </div>
             </main>

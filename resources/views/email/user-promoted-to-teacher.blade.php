@@ -14,11 +14,10 @@
             <main class="p-20">
                 <div class="mt-4 p-4 max-w-lg text-center space-y-4 bg-white rounded-lg border shadow-md sm:p-8 dark:bg-gray-800 dark:border-gray-700 mx-auto">
                     <h5 class="text-4xl font-bold whitespace-nowrap text-gray-800">GTV</h5>
-                    <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400 font-bold">Promotion Announcement</p>
                     <div class="space-y-1">
-                        <h1 class="text-4xl font-bold text-gray-800 mb-6 dark:text-white">Congratulations, {{ $user->name }}!</h1>
-                        <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400 mb-6">You have been promoted to a Teacher. We are excited to see what you will bring to our community.</p>
-                        <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400">Best regards,<br>The Administration Team</p>
+                        <h1 class="text-4xl font-bold text-gray-800 mb-6 dark:text-white">¡Felicidades, {{ $user->name }}!</h1>
+                        <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400 mb-6">Tu rol a sido cambiado a Profesor. Estamos emocionados de ver lo que aportarás a nuestra comunidad.</p>
+                        <p class="text-base text-gray-700 sm:text-lg dark:text-gray-400">Saludos cordiales,<br>El equipo de Administración</p>
                     </div>
                 </div>
             </main>

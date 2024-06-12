@@ -21,6 +21,6 @@ class TeacherRequest extends Mailable
     {
         $user = $this->user;
 
-        return $this->subject('User Request')->view('email.teacher-request', compact('user'));
+        return $this->subject('Peticion de usuario')->view('email.teacher-request', compact('user'));
     }
 }

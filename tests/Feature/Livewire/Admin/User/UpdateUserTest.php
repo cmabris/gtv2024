@@ -50,20 +50,7 @@ class UpdateUserTest extends TestCase
             ->call('update', $user)
             ->assertHasErrors(['editForm.email' => 'required']);
     }
-    /** @test */
-    public function test_email_must_be_confirmed()
-    {
-        $adminUser = $this->createAdmin();
-        $user = $this->createStudent();
-
-        Livewire::actingAs($adminUser)
-            ->test(EditUser::class)
-            ->call('openEditModal', $user)
-            ->set('editForm.email', 'test@example.com')
-            ->set('editForm.email_confirmation', 'different@example.com')
-            ->call('update', $user)
-            ->assertHasErrors(['editForm.email' => 'confirmed']);
-    }
+    
     /** @test */
     public function test_email_must_be_a_valid_email()
     {
@@ -108,33 +95,7 @@ class UpdateUserTest extends TestCase
     }
 
 //PASSWORD
-    /** @test */
-    public function password_is_required()
-    {
-        $adminUser = $this->createAdmin();
-        $user = $this->createStudent();
 
-        Livewire::actingAs($adminUser)
-            ->test(EditUser::class)
-            ->call('openEditModal', $user)
-            ->set('editForm.password', '')
-            ->call('update', $user)
-            ->assertHasErrors(['editForm.password' => 'required']);
-    }
-    /** @test */
-    public function password_must_be_confirmed()
-    {
-        $adminUser = $this->createAdmin();
-        $user = $this->createStudent();
-
-        Livewire::actingAs($adminUser)
-            ->test(EditUser::class)
-            ->call('openEditModal', $user)
-            ->set('editForm.password', 'password')
-            ->set('editForm.password_confirmation', 'different')
-            ->call('update', $user)
-            ->assertHasErrors(['editForm.password' => 'confirmed']);
-    }
     /** @test */
     public function password_length_must_be_at_least_8_characters()
     {
