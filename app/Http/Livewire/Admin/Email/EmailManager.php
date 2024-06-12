@@ -19,6 +19,9 @@ class EmailManager extends Component
     public $email;
     public $user;
     public $listeners = ['delete'];
+    
+    public $showDeleteModal = false;
+    public $emailToDelete;
 
     public $search;
     public $searchColumn = 'id';
@@ -106,12 +109,21 @@ class EmailManager extends Component
         $this->emit('emailUpdated');
     }
 
-    public function delete(Email $email)
+    public function confirmDelete(Email $email)
     {
+        $this->emailToDelete = $email;
+        $this->showDeleteModal = true;
+    }
+
+    public function performDelete()
+    {
+        $email = $this->emailToDelete;
 
         $user = User::where('email', $email->from)->first();
 
-        $email->delete();
+        Email::where('from', $email->from)
+            ->where('subject', 'Petición cambio de rol a profesor')
+            ->delete();
 
         if ($user) {
             $user->requested_teacher_role = false;
@@ -120,7 +132,12 @@ class EmailManager extends Component
             Mail::to($user->email)->send(new ProposalRejected($user));
         }
 
-        Log::info('Email with ID ' . $email->id . ' was deleted');
+        Log::info('All emails with subject "Petición cambio de rol a profesor" from ' . $user->email . ' were deleted');
+
+        $this->showDeleteModal = false;
+        $this->emailToDelete = null;
+
+        $this->emit('emailDeleted');
     }
 
     public function sort($field)

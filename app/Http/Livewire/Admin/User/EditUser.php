@@ -3,7 +3,7 @@
 namespace App\Http\Livewire\Admin\User;
 
 use App\Models\User;
-use App\Models\EmailForAdmin; // Importar el modelo correspondiente
+use App\Models\EmailForAdmin;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -28,8 +28,7 @@ class EditUser extends Component
     protected $rules = [
         'editForm.name' => 'required|string',
         'editForm.email' => 'required|confirmed|string|max:45|unique:users,email',
-        'editForm.email_confirmation' => '',
-        'editForm.password' => 'required|confirmed|string|min:8|max:500',
+        'editForm.password' => 'nullable|confirmed|string|min:8|max:500',
         'editForm.password_confirmation' => '',
         'editForm.role' => 'required|exists:roles,id',
     ];
@@ -57,7 +56,6 @@ class EditUser extends Component
         }
         $this->editForm['name'] = $user->name;
         $this->editForm['email'] = $user->email;
-        $this->editForm['email_confirmation'] = $user->email;
         $this->editForm['role'] = $user->roles->first()->id;
         $this->editForm['open'] = true;
     }
@@ -68,11 +66,16 @@ class EditUser extends Component
 
         $this->validate();
 
-        $isUpdated = $user->update([
+        $updateData = [
             'name' => $this->editForm['name'],
             'email' => $this->editForm['email'],
-            'password'=> \bcrypt($this->editForm['password']),
-        ]);
+        ];
+
+        if (!empty($this->editForm['password'])) {
+            $updateData['password'] = bcrypt($this->editForm['password']);
+        }
+
+        $isUpdated = $user->update($updateData);
 
         $newRole = Role::findById($this->editForm['role']);
         $currentRole = $user->roles->first();
