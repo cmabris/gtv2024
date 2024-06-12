@@ -83,12 +83,11 @@
                 </x-jet-dropdown>
             @endauth
             @role('Administrador')
-                <div class="space-x-4">    
+                <div class="space-x-4">
                 @livewire('admin.unread-email-counter')
                 </div>
             @endrole
         </div>
-       
     </div>
 </nav>
 
@@ -127,7 +126,6 @@
         updateLayout();
 
         window.addEventListener('resize', updateLayout);
-
     });
 </script>
 
