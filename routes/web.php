@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'admin'], function () {
     Route::get('users', ListUsers::class)->name('users.index');
     Route::get('video-items', ListVideoItems::class)->name('video-items.index');
+    Route::get('admin-emails', EmailManager::class)->name('admin.emails');
 });
 
 Route::group(['middleware' => 'admin_or_teacher'], function () {
@@ -29,7 +30,6 @@ Route::group(['middleware' => 'admin_or_teacher_or_student'], function () {
     Route::get('places', ListPlaces::class)->name('places.index');
 });
 
-Route::get('admin-emails', EmailManager::class)->name('admin.emails');
  /*   Route::get('email-cositas', function (){
 
         return view('email.user-created');
